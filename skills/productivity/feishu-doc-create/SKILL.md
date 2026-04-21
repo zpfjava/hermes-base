@@ -77,3 +77,41 @@ Poll every 2s. Check result.job_status:
 - Markdown headings, bold, code blocks, and lists are all preserved by the import.
 - After import, verify with `feishu_doc_read(doc_token)` if needed.
 - To place doc in a wiki/shared space: `mount_type: 2`, `mount_key: {wiki_node_token}`.
+
+## Troubleshooting and real-world findings
+
+### 1) `10014 app secret invalid`
+
+If tenant token creation succeeds for some apps but fails for the app you expected to use, do **not** assume Feishu is down.
+
+Common real-world cause: after migration or profile cloning, the credentials in `~/.hermes/profiles/<profile>/.env` are stale or overwritten, while the original source config still has valid credentials.
+
+Practical fallback order:
+1. Try the intended Hermes profile `.env`
+2. If it returns `10014`, check other profile `.env` files
+3. If those are stale too, check the original migration source (for example `/root/.openclaw/openclaw.json` under `channels.feishu.accounts.*`)
+
+### 2) Token works, but upload fails with `99991672 Access denied`
+
+This means the app can authenticate, but does **not** have required Drive scopes. Token success alone does **not** prove the app can create docs.
+
+Typical error message mentions one of these missing scopes:
+- `drive:drive`
+- `drive:file`
+- `drive:file:upload`
+
+Action:
+- Test `upload_all` against candidate apps and pick one that actually has Drive permission
+- Do not keep retrying the same app if token is OK but upload is denied
+
+### 3) In multi-bot / multi-app setups, not every Feishu app is equal
+
+When several Feishu apps exist in one workspace, some may only be provisioned for messaging while others also have Drive/doc permissions.
+
+Recommended strategy:
+1. Enumerate candidate app credentials
+2. Verify token acquisition
+3. Verify `drive/v1/files/upload_all`
+4. Only then create the import task
+
+This avoids wasting time on apps that can chat but cannot create documents.

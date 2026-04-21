@@ -1,0 +1,45 @@
+{
+  "jobs": [
+    {
+      "id": "823589b8f6d3",
+      "name": "\u6d4b\u8bd5 - \u76d8\u4e2d\u76ef\u76d8",
+      "prompt": "\u8fd9\u662f\u4e00\u4e2a\u5b9a\u65f6\u4efb\u52a1\u6d4b\u8bd5\u3002\n\n\u5f53\u524d\u65f6\u95f4\uff1a\u8bf7\u8f93\u51fa\u5f53\u524d\u65e5\u671f\u548c\u65f6\u95f4\u3002\n\n\u4efb\u52a1\u72b6\u6001\uff1a\u2705 \u5b9a\u65f6\u4efb\u52a1\u7cfb\u7edf\u6b63\u5e38\u5de5\u4f5c\n\n\u6d4b\u8bd5\u5185\u5bb9\uff1a\n1. \u4efb\u52a1\u521b\u5efa\uff1a\u6210\u529f\n2. \u4efb\u52a1\u6267\u884c\uff1a\u6210\u529f\n3. \u7ed3\u679c\u4ea4\u4ed8\uff1a\u6210\u529f\n\n\u8fd9\u662f\u4e00\u6761\u6d4b\u8bd5\u6d88\u606f\uff0c\u7528\u4e8e\u9a8c\u8bc1\u5b9a\u65f6\u4efb\u52a1\u7cfb\u7edf\u662f\u5426\u6b63\u5e38\u8fd0\u884c\u3002",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 17 * * *",
+        "display": "0 17 * * *"
+      },
+      "schedule_display": "0 17 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 2
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-21T16:07:11.033709+08:00",
+      "next_run_at": "2026-04-22T17:00:00+08:00",
+      "last_run_at": "2026-04-21T17:00:52.157494+08:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "feishu:oc_4d72a55666168416dd88ffab3943e920",
+      "origin": {
+        "platform": "feishu",
+        "chat_id": "oc_4d72a55666168416dd88ffab3943e920",
+        "chat_name": "oc_4d72a55666168416dd88ffab3943e920",
+        "thread_id": null
+      },
+      "profile": "wealth",
+      "hermes_home": "/root/.hermes/profiles/wealth"
+    }
+  ],
+  "updated_at": "2026-04-21T17:00:52.157998+08:00"
+}

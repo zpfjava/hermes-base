@@ -11,7 +11,8 @@ audio_cache/
 image_cache/
 logs/
 sessions/
-cron/
+cron/*
+!cron/jobs.json
 sandboxes/
 
 # Process files
@@ -33,3 +34,32 @@ interrupt_debug.log
 .pairing/
 .pastes/
 .checkpoints/
+
+# Large trees never meant for Git backup
+migration/
+workspaces/
+checkpoints/
+
+# Nested git repo placeholder should stay as gitlink only
+hermes-agent/
+
+# Profile runtime data
+profiles/*/cache/
+profiles/*/audio_cache/
+profiles/*/image_cache/
+profiles/*/logs/
+profiles/*/sessions/
+profiles/*/sandboxes/
+profiles/*/cron/output/
+profiles/*/cron/.tick.lock
+profiles/*/state.db
+profiles/*/state.db-shm
+profiles/*/state.db-wal
+
+# Account/session runtime artifacts
+weixin/accounts/*.context-tokens.json
+weixin/accounts/*.sync.json
+.hermes_history
+.env.bak
+auth.lock
+config.yaml.bak

@@ -1,0 +1,169 @@
+{
+  "jobs": [
+    {
+      "id": "994c3838868a",
+      "name": "\u6bcf\u65e5\u65e9\u5b89+AI\u70ed\u70b9",
+      "prompt": "\u4f60\u662f\u4e00\u540d\u9762\u5411\u963f\u5e03\u7684 AI \u8d44\u8baf\u52a9\u624b\u3002\u6bcf\u5929\u5317\u4eac\u65f6\u95f4\u65e9\u4e0a 8 \u70b9\u6267\u884c\u4e00\u6b21\uff1a\n\n1. \u641c\u96c6\u5f53\u65e5 AI \u70ed\u70b9\uff0c\u4f18\u5148\u5173\u6ce8\uff1a\n- The Verge AI: https://www.theverge.com/ai-artificial-intelligence\n- Wired AI: https://www.wired.com/tag/artificial-intelligence/\n- \u673a\u5668\u4e4b\u5fc3: https://www.jiqizhixin.com/\n- Hugging Face Papers: https://huggingface.co/papers\n2. \u5982\u5185\u5bb9\u4e0d\u8db3\uff0c\u53ef\u8865\u5145\u641c\u7d22\uff1a\"AI news today\"\u3001\"\u5927\u6a21\u578b\u6700\u65b0\u52a8\u6001\"\u3002\n3. \u9009\u51fa 3-5 \u6761\u6700\u91cd\u8981\u7684\u70ed\u70b9\u3002\n4. \u8f93\u51fa\u5230\u98de\u4e66\u7fa4\u7684\u5185\u5bb9\u5fc5\u987b\u7b80\u6d01\u3001\u53ef\u8bfb\u3001\u9002\u5408\u65e9\u62a5\uff1a\n\n\u2600\ufe0f \u65e9\u5b89\uff01\u4eca\u5929\u662f X \u6708 X \u65e5\n\n\ud83d\udd25 \u4eca\u65e5 AI \u70ed\u70b9\uff1a\n1. \u6807\u9898\n   \u6838\u5fc3\u5185\u5bb9 1-2 \u53e5\u8bdd\n   \ud83d\udd17 \u539f\u6587\u94fe\u63a5\n   \ud83d\udcf0 \u6765\u6e90\n\n\u6700\u540e\u8865 1 \u53e5\u201c\u8d8b\u52bf\u6d1e\u5bdf\u201d\u3002\n\n\u8981\u6c42\uff1a\n- \u4e0d\u8981\u7f16\u9020\u65b0\u95fb\u3002\n- \u6bcf\u6761\u90fd\u4fdd\u7559\u6765\u6e90\u548c\u94fe\u63a5\u3002\n- \u5982\u679c\u67d0\u4e2a\u7ad9\u70b9\u6293\u53d6\u5931\u8d25\uff0c\u8df3\u8fc7\u7ee7\u7eed\u3002\n- \u76f4\u63a5\u8f93\u51fa\u6700\u7ec8\u53ef\u53d1\u6d88\u606f\uff0c\u4e0d\u8981\u89e3\u91ca\u8fc7\u7a0b\u3002",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 8 * * *",
+        "display": "0 8 * * *"
+      },
+      "schedule_display": "0 8 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 2
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-20T16:31:15.111168+08:00",
+      "next_run_at": "2026-04-22T08:00:00+08:00",
+      "last_run_at": "2026-04-21T23:08:08.341531+08:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "feishu:oc_f0d7f9a753c626ad3562846e0584cf69",
+      "origin": {
+        "platform": "weixin",
+        "chat_id": "o9cq809nd9e9DZFNMdgpCqbemmA8@im.wechat",
+        "chat_name": null,
+        "thread_id": null
+      },
+      "profile": "commander",
+      "hermes_home": "/root/.hermes/profiles/commander"
+    },
+    {
+      "id": "0df5c06ac507",
+      "name": "\u6bcf\u65e5\u5b98\u65b9\u6587\u6863\u66f4\u65b0\u68c0\u67e5",
+      "prompt": "\u4f60\u662f\u963f\u5e03\u7684\u5b98\u65b9\u6587\u6863\u66f4\u65b0\u76d1\u63a7\u52a9\u624b\u3002\u6bcf\u5929\u5317\u4eac\u65f6\u95f4 08:00 \u68c0\u67e5 OpenClaw \u5b98\u65b9\u6587\u6863\u9875\u9762\u662f\u5426\u6709\u660e\u663e\u66f4\u65b0\uff1a\nhttps://docs.openclaw.ai/zh-CN/concepts/multi-agent\n\n\u6267\u884c\u8981\u6c42\uff1a\n1. \u83b7\u53d6\u9875\u9762\u5185\u5bb9\u5e76\u67e5\u770b\u662f\u5426\u6709\u65b0\u589e\u7ae0\u8282\u3001\u7248\u672c\u53d8\u5316\u3001\u660e\u663e\u529f\u80fd\u63cf\u8ff0\u53d8\u5316\u3002\n2. \u5982\u679c\u6709\u66f4\u65b0\uff0c\u8f93\u51fa 2-3 \u6761\u5173\u952e\u53d8\u5316\u6458\u8981\u3002\n3. \u5982\u679c\u6ca1\u6709\u660e\u786e\u66f4\u65b0\uff0c\u5c31\u53ea\u8f93\u51fa\uff1a\u4eca\u65e5\u65e0\u66f4\u65b0\u3002\n4. \u76f4\u63a5\u8f93\u51fa\u6700\u7ec8\u8981\u53d1\u5230\u98de\u4e66\u7fa4\u7684\u5185\u5bb9\uff0c\u4e0d\u8981\u89e3\u91ca\u8fc7\u7a0b\u3002",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 8 * * *",
+        "display": "0 8 * * *"
+      },
+      "schedule_display": "0 8 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 1
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-20T16:31:21.134283+08:00",
+      "next_run_at": "2026-04-22T08:00:00+08:00",
+      "last_run_at": "2026-04-21T08:04:21.890897+08:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "feishu:oc_f0d7f9a753c626ad3562846e0584cf69",
+      "origin": {
+        "platform": "weixin",
+        "chat_id": "o9cq809nd9e9DZFNMdgpCqbemmA8@im.wechat",
+        "chat_name": null,
+        "thread_id": null
+      },
+      "profile": "dev",
+      "hermes_home": "/root/.hermes/profiles/dev"
+    },
+    {
+      "id": "1f02f629cdd2",
+      "name": "Hermes Git \u5907\u4efd - \u9636\u6bb51: \u5ba1\u67e5\u9884\u544a",
+      "prompt": "\u4f60\u662f\u963f\u5e03\u7684\u4ee3\u7801\u4ed3\u5e93\u7ba1\u7406\u52a9\u624b\u3002\u8bf7\u53ea\u64cd\u4f5c `/root/.hermes` \u8fd9\u4e2a Git \u4ed3\u5e93\uff0c\u5e76\u5c06\u6700\u7ec8\u7ed3\u679c\u53d1\u9001\u5230\u5f53\u524d\u914d\u7f6e\u7684\u98de\u4e66\u76ee\u6807\u3002\n\n\u4efb\u52a1\uff1a\u6267\u884c Hermes \u6bcf\u65e5\u4ee3\u7801\u5907\u4efd\u7684\u9884\u68c0\u67e5\u4e0e\u9884\u544a\u3002\n\n\u4e25\u683c\u8981\u6c42\uff1a\n1. \u4f7f\u7528\u7ec8\u7aef\u8fdb\u5165 `/root/.hermes`\n2. \u83b7\u53d6\u5e76\u68c0\u67e5\u4ee5\u4e0b\u4fe1\u606f\uff1a\n   - \u5f53\u524d\u5206\u652f\uff1a`git branch --show-current`\n   - \u4ed3\u5e93\u6839\u76ee\u5f55\uff1a`git rev-parse --show-toplevel`\n   - \u8fdc\u7a0b\u5730\u5740\uff1a`git remote -v`\n   - \u5de5\u4f5c\u533a\u6539\u52a8\uff1a`git status --short`\n   - \u6539\u52a8\u7edf\u8ba1\uff1a`git diff --stat`\n3. \u76ee\u6807\u671f\u671b\u503c\uff1a\n   - \u4ed3\u5e93\u76ee\u5f55\u5e94\u4e3a `/root/.hermes`\n   - \u76ee\u6807\u5206\u652f\u5e94\u4e3a `master`\n   - \u76ee\u6807\u8fdc\u7a0b\u4ed3\u5e93\u5e94\u5305\u542b `https://github.com/zpfjava/hermes-base.git`\n4. \u5982\u679c\u4efb\u4e00\u5173\u952e\u524d\u63d0\u4e0d\u6ee1\u8db3\uff08\u4f8b\u5982\u5f53\u524d\u4e0d\u662f `master`\u3001\u672a\u914d\u7f6e\u76ee\u6807 remote\u3001\u76ee\u5f55\u4e0d\u5bf9\uff09\uff0c\u4e0d\u8981\u5c1d\u8bd5\u63d0\u4ea4\uff1b\u76f4\u63a5\u8f93\u51fa\u98ce\u9669\u9884\u8b66\u3002\n5. \u5982\u679c\u6ca1\u6709\u4efb\u4f55\u6539\u52a8\uff0c\u76f4\u63a5\u8f93\u51fa\uff1a`\u2705 \u4eca\u65e5\u65e0\u4ee3\u7801\u6539\u52a8\uff0c\u8df3\u8fc7\u4eca\u665a\u5907\u4efd`\u3002\n6. \u5982\u679c\u6709\u6539\u52a8\u4e14\u524d\u63d0\u6ee1\u8db3\uff0c\u8f93\u51fa\u665a\u95f4\u9884\u544a\uff0c\u5305\u542b\uff1a\u4ed3\u5e93\u3001\u5206\u652f\u3001\u6539\u52a8\u6982\u89c8\u3001\u5173\u952e\u6587\u4ef6\u5217\u8868\uff08\u6700\u591a10\u4e2a\uff09\u300123:03\u5c06\u6267\u884c\u81ea\u52a8\u63d0\u4ea4\u3001\u53ef\u901a\u8fc7\u521b\u5efa\u6587\u4ef6 `/tmp/hermes-git-commit.cancel` \u53d6\u6d88\u3002\n7. \u53ea\u8f93\u51fa\u6700\u7ec8\u8981\u53d1\u7684\u6d88\u606f\uff0c\u4e0d\u8981\u9644\u5e26\u8fc7\u7a0b\u8bf4\u660e\u3002",
+      "skills": [
+        "github-repo-management"
+      ],
+      "skill": "github-repo-management",
+      "model": "qwen3.5-plus",
+      "provider": "dashscope",
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 23 * * *",
+        "display": "0 23 * * *"
+      },
+      "schedule_display": "0 23 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 2
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-22T01:15:10.916332+08:00",
+      "next_run_at": "2026-04-22T23:00:00+08:00",
+      "last_run_at": "2026-04-22T01:22:21.624408+08:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "feishu:oc_f0d7f9a753c626ad3562846e0584cf69",
+      "origin": {
+        "platform": "weixin",
+        "chat_id": "o9cq809nd9e9DZFNMdgpCqbemmA8@im.wechat",
+        "chat_name": null,
+        "thread_id": null
+      },
+      "profile": "default",
+      "hermes_home": "/root/.hermes"
+    },
+    {
+      "id": "d7a414512a6f",
+      "name": "Hermes Git \u5907\u4efd - \u9636\u6bb52: \u81ea\u52a8\u63d0\u4ea4",
+      "prompt": "\u4f60\u662f Hermes Git \u81ea\u52a8\u5907\u4efd\u4efb\u52a1\u7684\u6267\u884c\u8005\u3002\u53ea\u5141\u8bb8\u64cd\u4f5c\u4ed3\u5e93 `/root/.hermes`\uff0c\u76ee\u6807\u5206\u652f\u56fa\u5b9a\u4e3a `master`\uff0c\u8fdc\u7a0b\u56fa\u5b9a\u4e3a `origin`\uff0c\u76ee\u6807\u4ed3\u5e93\u5e94\u4e3a `https://github.com/zpfjava/hermes-base.git`\u3002\n\n\u6267\u884c\u8981\u6c42\uff1a\n1. \u5148\u68c0\u67e5 `/root/.hermes` \u662f\u5426\u662f git \u4ed3\u5e93\uff1b\u82e5\u4e0d\u662f\uff0c\u76f4\u63a5\u62a5\u544a\u5931\u8d25\u3002\n2. \u68c0\u67e5\u5f53\u524d\u5206\u652f\u662f\u5426\u4e3a `master`\uff1b\u82e5\u4e0d\u662f\uff0c\u76f4\u63a5\u62a5\u544a\u5931\u8d25\uff0c\u4e0d\u8981\u5207\u5206\u652f\u3002\n3. \u68c0\u67e5 `origin` \u662f\u5426\u5b58\u5728\u4e14 URL \u4e3a `https://github.com/zpfjava/hermes-base.git`\uff1b\u82e5\u4e0d\u5339\u914d\uff0c\u76f4\u63a5\u62a5\u544a\u5931\u8d25\uff0c\u4e0d\u8981\u6539\u8fdc\u7a0b\u3002\n4. \u5907\u4efd\u65f6\u5fc5\u987b\u8df3\u8fc7\u4ee5\u4e0b\u5185\u5bb9\uff0c\u907f\u514d\u518d\u6b21\u5361\u6b7b\u6216\u8bef\u7eb3\u5165\u5d4c\u5957\u4ed3\u5e93/\u5927\u4f53\u79ef\u76ee\u5f55\uff1a\n   - `hermes-agent/`\n   - `migration/`\n   - `workspaces/`\n   - `checkpoints/`\n   - `bin/`\n   - `logs/`\n   - `sessions/`\n   - `cache/`\n   - `image_cache/`\n   - `audio_cache/`\n   - `cron/`\n   - \u4efb\u4f55\u5d4c\u5957 git \u4ed3\u5e93\n5. \u4f18\u5148\u5c0a\u91cd\u73b0\u6709 `.gitignore`\u3002\u5728\u6b64\u57fa\u7840\u4e0a\uff0c\u53ea\u63d0\u4ea4\u5b89\u5168\u4e14\u5fc5\u8981\u7684 Hermes \u914d\u7f6e/\u811a\u672c/\u8bb0\u5fc6/skills/profile \u7b49\u53d8\u66f4\uff1b\u5982\u679c\u6ca1\u6709\u53ef\u63d0\u4ea4\u53d8\u66f4\uff0c\u76f4\u63a5\u8f93\u51fa\u201c\u65e0\u9700\u63d0\u4ea4\uff0c\u672c\u6b21\u8df3\u8fc7\u201d\u3002\n6. \u5982\u679c\u4ed3\u5e93\u8fd8\u6ca1\u6709\u63d0\u4ea4\u5386\u53f2\uff0c\u4e5f\u8981\u517c\u5bb9\u9996\u6b21\u63d0\u4ea4\u573a\u666f\u3002\n7. \u63d0\u4ea4\u4fe1\u606f\u683c\u5f0f\uff1a`\ud83e\udd16 Hermes \u81ea\u52a8\u5907\u4efd YYYY-MM-DD HH:MM`\u3002\n8. \u6210\u529f\u63d0\u4ea4\u540e\u6267\u884c `git push origin master`\u3002\u5982\u679c already up-to-date\uff0c\u4e5f\u8981\u660e\u786e\u8bf4\u660e\u3002\n9. \u8f93\u51fa\u7ed3\u6784\u5fc5\u987b\u5305\u542b\uff1a\n   - \u4ed3\u5e93\u72b6\u6001\u6458\u8981\n   - \u672c\u6b21\u7eb3\u5165\u63d0\u4ea4\u7684\u8def\u5f84\u6982\u89c8\n   - commit hash\uff08\u82e5\u6709\uff09\n   - push \u7ed3\u679c\n   - \u6700\u7ec8\u7ed3\u8bba\uff08\u6210\u529f / \u8df3\u8fc7 / \u5931\u8d25\uff09\n10. \u4e0d\u8981\u6267\u884c\u4efb\u4f55\u7834\u574f\u6027\u64cd\u4f5c\uff1a\u4e0d\u8981 reset\uff0c\u4e0d\u8981 clean\uff0c\u4e0d\u8981\u6539 remote\uff0c\u4e0d\u8981\u5207\u5206\u652f\uff0c\u4e0d\u8981\u5220\u9664\u6587\u4ef6\u3002",
+      "skills": [
+        "github-repo-management"
+      ],
+      "skill": "github-repo-management",
+      "model": "qwen3.5-plus",
+      "provider": "dashscope",
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "3 23 * * *",
+        "display": "3 23 * * *"
+      },
+      "schedule_display": "3 23 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 1
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-22T01:15:23.872838+08:00",
+      "next_run_at": "2026-04-22T23:03:00+08:00",
+      "last_run_at": "2026-04-22T01:16:57.998888+08:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "feishu:oc_f0d7f9a753c626ad3562846e0584cf69",
+      "origin": {
+        "platform": "weixin",
+        "chat_id": "o9cq809nd9e9DZFNMdgpCqbemmA8@im.wechat",
+        "chat_name": null,
+        "thread_id": null
+      },
+      "profile": "default",
+      "hermes_home": "/root/.hermes"
+    }
+  ],
+  "updated_at": "2026-04-22T01:36:31.266876+08:00"
+}

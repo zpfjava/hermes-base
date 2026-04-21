@@ -1,0 +1,285 @@
+{
+  "jobs": [
+    {
+      "id": "994c3838868a",
+      "name": "每日早安+AI热点",
+      "prompt": "你是一名面向阿布的 AI 资讯助手。每天北京时间早上 8 点执行一次：\n\n1. 搜集当日 AI 热点，优先关注：\n- The Verge AI: https://www.theverge.com/ai-artificial-intelligence\n- Wired AI: https://www.wired.com/tag/artificial-intelligence/\n- 机器之心: https://www.jiqizhixin.com/\n- Hugging Face Papers: https://huggingface.co/papers\n2. 如内容不足，可补充搜索：\"AI news today\"、\"大模型最新动态\"。\n3. 选出 3-5 条最重要的热点。\n4. 输出到飞书群的内容必须简洁、可读、适合早报：\n\n☀️ 早安！今天是 X 月 X 日\n\n🔥 今日 AI 热点：\n1. 标题\n   核心内容 1-2 句话\n   🔗 原文链接\n   📰 来源\n\n最后补 1 句“趋势洞察”。\n\n要求：\n- 不要编造新闻。\n- 每条都保留来源和链接。\n- 如果某个站点抓取失败，跳过继续。\n- 直接输出最终可发消息，不要解释过程。",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 8 * * *",
+        "display": "0 8 * * *"
+      },
+      "schedule_display": "0 8 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 1
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-20T16:31:15.111168+08:00",
+      "next_run_at": "2026-04-22T08:00:00+08:00",
+      "last_run_at": "2026-04-21T08:03:08.525723+08:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "feishu:oc_f0d7f9a753c626ad3562846e0584cf69",
+      "origin": {
+        "platform": "weixin",
+        "chat_id": "o9cq809nd9e9DZFNMdgpCqbemmA8@im.wechat",
+        "chat_name": null,
+        "thread_id": null
+      },
+      "profile": "commander",
+      "hermes_home": "/root/.hermes/profiles/commander"
+    },
+    {
+      "id": "a984fd3e388b",
+      "name": "周报提醒",
+      "prompt": "你是阿布的周报提醒助手。每周日北京时间 18:00 提醒一次。请生成一条简短、温和但有推动力的提醒消息，要求：\n- 提醒准备本周与上周的数据截图\n- 提醒整理本周完成事项、问题、下周计划\n- 提醒先收集素材，再写正文\n- 控制在 5 句话以内\n- 可带少量 emoji\n- 直接输出最终提醒，不要解释",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 18 * * 0",
+        "display": "0 18 * * 0"
+      },
+      "schedule_display": "0 18 * * 0",
+      "repeat": {
+        "times": null,
+        "completed": 3
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-20T16:31:16.115816+08:00",
+      "next_run_at": "2026-04-26T18:00:00+08:00",
+      "last_run_at": "2026-04-21T08:50:24.545681+08:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "feishu:oc_f0d7f9a753c626ad3562846e0584cf69",
+      "origin": {
+        "platform": "weixin",
+        "chat_id": "o9cq809nd9e9DZFNMdgpCqbemmA8@im.wechat",
+        "chat_name": null,
+        "thread_id": null
+      },
+      "profile": "planning",
+      "hermes_home": "/root/.hermes/profiles/planning"
+    },
+    {
+      "id": "4987ec0c4ced",
+      "name": "小红书-笔记发布提醒",
+      "prompt": "你是阿布的小红书执行提醒助手。每个工作日北京时间 21:30 发送一条发布提醒。消息要求：\n- 提醒现在该发布今天制作的 1-2 篇笔记\n- 提醒记录阅读、收藏、评论等数据\n- 语气直接、简洁、有执行感\n- 控制在 6 行内\n- 直接输出最终提醒",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 21 * * 1-5",
+        "display": "30 21 * * 1-5"
+      },
+      "schedule_display": "30 21 * * 1-5",
+      "repeat": {
+        "times": null,
+        "completed": 3
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-20T16:31:17.119789+08:00",
+      "next_run_at": "2026-04-22T21:30:00+08:00",
+      "last_run_at": "2026-04-21T21:30:21.876909+08:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "feishu:oc_f0d7f9a753c626ad3562846e0584cf69",
+      "origin": {
+        "platform": "weixin",
+        "chat_id": "o9cq809nd9e9DZFNMdgpCqbemmA8@im.wechat",
+        "chat_name": null,
+        "thread_id": null
+      },
+      "profile": "content",
+      "hermes_home": "/root/.hermes/profiles/content"
+    },
+    {
+      "id": "29f205cbf947",
+      "name": "小红书-周末批量制作",
+      "prompt": "你是阿布的小红书执行提醒助手。每周六、周日北京时间 09:00 发送一条批量制作提醒。消息要求：\n- 提醒集中制作下周要发的小红书笔记\n- 建议目标：3-4 篇文案 + 封面\n- 强调周末批量做，工作日更轻松\n- 语气简洁、直接、有行动感\n- 直接输出最终提醒",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 9 * * 0,6",
+        "display": "0 9 * * 0,6"
+      },
+      "schedule_display": "0 9 * * 0,6",
+      "repeat": {
+        "times": null,
+        "completed": 0
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-20T16:31:18.122902+08:00",
+      "next_run_at": "2026-04-25T09:00:00+08:00",
+      "last_run_at": null,
+      "last_status": null,
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "feishu:oc_f0d7f9a753c626ad3562846e0584cf69",
+      "origin": {
+        "platform": "weixin",
+        "chat_id": "o9cq809nd9e9DZFNMdgpCqbemmA8@im.wechat",
+        "chat_name": null,
+        "thread_id": null
+      },
+      "profile": "content",
+      "hermes_home": "/root/.hermes/profiles/content"
+    },
+    {
+      "id": "198eb8cece1f",
+      "name": "小红书-周末发布提醒",
+      "prompt": "你是阿布的小红书执行提醒助手。每周六、周日北京时间 11:00 发送一条发布提醒。消息要求：\n- 提醒发布今天准备好的笔记\n- 建议目标：发布 3 篇并顺手记录数据\n- 强调周末流量窗口\n- 语气简洁、直接、有执行感\n- 直接输出最终提醒",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 11 * * 0,6",
+        "display": "0 11 * * 0,6"
+      },
+      "schedule_display": "0 11 * * 0,6",
+      "repeat": {
+        "times": null,
+        "completed": 0
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-20T16:31:19.126923+08:00",
+      "next_run_at": "2026-04-25T11:00:00+08:00",
+      "last_run_at": null,
+      "last_status": null,
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "feishu:oc_f0d7f9a753c626ad3562846e0584cf69",
+      "origin": {
+        "platform": "weixin",
+        "chat_id": "o9cq809nd9e9DZFNMdgpCqbemmA8@im.wechat",
+        "chat_name": null,
+        "thread_id": null
+      },
+      "profile": "content",
+      "hermes_home": "/root/.hermes/profiles/content"
+    },
+    {
+      "id": "f92159083fc4",
+      "name": "小红书-每日数据记录",
+      "prompt": "你是阿布的数据记录提醒助手。每天北京时间 20:00 发送一条数据记录提醒。消息要求：\n- 提醒记录今天的小红书核心数据\n- 至少包含：笔记发布数、支付金额、订单数、访客数\n- 强调数据积累的意义，但不要鸡汤\n- 简短直接，适合群里一眼看懂\n- 直接输出最终提醒",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 20 * * *",
+        "display": "0 20 * * *"
+      },
+      "schedule_display": "0 20 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 5
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-20T16:31:20.130598+08:00",
+      "next_run_at": "2026-04-22T20:00:00+08:00",
+      "last_run_at": "2026-04-21T20:01:06.243839+08:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "feishu:oc_f0d7f9a753c626ad3562846e0584cf69",
+      "origin": {
+        "platform": "weixin",
+        "chat_id": "o9cq809nd9e9DZFNMdgpCqbemmA8@im.wechat",
+        "chat_name": null,
+        "thread_id": null
+      },
+      "profile": "data",
+      "hermes_home": "/root/.hermes/profiles/data"
+    },
+    {
+      "id": "0df5c06ac507",
+      "name": "每日官方文档更新检查",
+      "prompt": "你是阿布的官方文档更新监控助手。每天北京时间 08:00 检查 OpenClaw 官方文档页面是否有明显更新：\nhttps://docs.openclaw.ai/zh-CN/concepts/multi-agent\n\n执行要求：\n1. 获取页面内容并查看是否有新增章节、版本变化、明显功能描述变化。\n2. 如果有更新，输出 2-3 条关键变化摘要。\n3. 如果没有明确更新，就只输出：今日无更新。\n4. 直接输出最终要发到飞书群的内容，不要解释过程。",
+      "skills": [],
+      "skill": null,
+      "model": null,
+      "provider": null,
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 8 * * *",
+        "display": "0 8 * * *"
+      },
+      "schedule_display": "0 8 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 1
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-20T16:31:21.134283+08:00",
+      "next_run_at": "2026-04-22T08:00:00+08:00",
+      "last_run_at": "2026-04-21T08:04:21.890897+08:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "feishu:oc_f0d7f9a753c626ad3562846e0584cf69",
+      "origin": {
+        "platform": "weixin",
+        "chat_id": "o9cq809nd9e9DZFNMdgpCqbemmA8@im.wechat",
+        "chat_name": null,
+        "thread_id": null
+      },
+      "profile": "dev",
+      "hermes_home": "/root/.hermes/profiles/dev"
+    }
+  ],
+  "updated_at": "2026-04-21T22:36:01.098553+08:00"
+}

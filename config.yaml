@@ -1,7 +1,7 @@
 model:
-  default: qwen3-max-2026-01-23
-  provider: dashscope
-  base_url: https://coding.dashscope.aliyuncs.com/v1
+  default: gpt-5.4
+  provider: openai-codex
+  base_url: https://chatgpt.com/backend-api/codex
   api_key: sk-sp-b36d4d79c1e8434187d17a875c8be4a7
   context_length: 256000
 providers:
@@ -10,27 +10,27 @@ providers:
     api_key: sk-sp-b36d4d79c1e8434187d17a875c8be4a7
     context_length: 256000
     models:
-      - id: qwen3.5-plus
-        name: Qwen3.5 Plus
-        context_length: 256000
-      - id: qwen3-max-2026-01-23
-        name: Qwen3 Max
-        context_length: 256000
-      - id: kimi-k2.5
-        name: Kimi K2.5
-        context_length: 256000
-      - id: glm-4
-        name: GLM-4
-        context_length: 128000
-      - id: deepseek-v3
-        name: DeepSeek V3
-        context_length: 128000
+    - id: qwen3.5-plus
+      name: Qwen3.5 Plus
+      context_length: 256000
+    - id: qwen3-max-2026-01-23
+      name: Qwen3 Max
+      context_length: 256000
+    - id: kimi-k2.5
+      name: Kimi K2.5
+      context_length: 256000
+    - id: glm-4
+      name: GLM-4
+      context_length: 128000
+    - id: deepseek-v3
+      name: DeepSeek V3
+      context_length: 128000
 fallback_providers: []
 credential_pool_strategies: {}
 toolsets:
 - hermes-cli
 agent:
-  max_turns: 90
+  max_turns: 60
   gateway_timeout: 1800
   restart_drain_timeout: 60
   service_tier: ''
@@ -352,42 +352,36 @@ code_execution:
   max_tool_calls: 50
 MINIMAX_CN_BASE_URL: https://api.minimaxi.com/v1
 ANTHROPIC_BASE_URL: https://breakout.wenwen-ai.com
+weixin:
+  token: your_weixin_token_here
+  account_id: your_account_id_here
+  base_url: https://api.weixin.qq.com
+  cdn_base_url: https://cdn.weixin.qq.com
+  home_channel: your_wechat_id_or_group_id_here
 custom_providers:
 - name: Breakout.wenwen-ai.com
   base_url: https://breakout.wenwen-ai.com/
-  api_key: sk-vMAd5Mkb9qjrbBDNISoHPcW4LkpxdREjpzy60N9XNz6lXWv9
+  api_key: sk-vMA...XWv9
   model: claude-sonnet-4-6
-
-# ── Fallback Model ────────────────────────────────────────────────────
-# Automatic provider failover when primary is unavailable.
-# Uncomment and configure to enable. Triggers on rate limits (429),
-# overload (529), service errors (503), or connection failures.
-#
-# Supported providers:
-#   openrouter   (OPENROUTER_API_KEY)  — routes to any model
-#   openai-codex (OAuth — hermes auth) — OpenAI Codex
-#   nous         (OAuth — hermes auth) — Nous Portal
-#   zai          (ZAI_API_KEY)         — Z.AI / GLM
-#   kimi-coding  (KIMI_API_KEY)        — Kimi / Moonshot
-#   kimi-coding-cn (KIMI_CN_API_KEY)   — Kimi / Moonshot (China)
-#   minimax      (MINIMAX_API_KEY)     — MiniMax
-#   minimax-cn   (MINIMAX_CN_API_KEY)  — MiniMax (China)
-#
-# For custom OpenAI-compatible endpoints, add base_url and api_key_env.
-#
-# fallback_model:
-#   provider: openrouter
-#   model: anthropic/claude-sonnet-4
-#
-# ── Smart Model Routing ────────────────────────────────────────────────
-# Optional cheap-vs-strong routing for simple turns.
-# Keeps the primary model for complex work, but can route short/simple
-# messages to a cheaper model across providers.
-#
-# smart_model_routing:
-#   enabled: true
-#   max_simple_chars: 160
-#   max_simple_words: 28
-#   cheap_model:
-#     provider: openrouter
-#     model: google/gemini-2.5-flash
+- name: qwencode
+  base_url: https://coding.dashscope.aliyuncs.com/v1
+  api_key: ''
+  api_mode: chat_completions
+- name: aigocode
+  base_url: https://api.aigocode.com/v1
+  api_key: ''
+  api_mode: chat_completions
+- name: minimax
+  base_url: https://api.minimax.chat/v1
+  api_key: ''
+  api_mode: chat_completions
+platforms:
+  weixin:
+    enabled: true
+    token: your_weixin_token_here
+    extra:
+      account_id: your_account_id_here
+      base_url: https://api.weixin.qq.com
+      cdn_base_url: https://cdn.weixin.qq.com
+home_channels:
+  weixin: your_wechat_id_or_group_id_here
