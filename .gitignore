@@ -57,8 +57,15 @@ profiles/*/state.db-shm
 profiles/*/state.db-wal
 
 # Account/session runtime artifacts
+weixin/
 weixin/accounts/*.context-tokens.json
 weixin/accounts/*.sync.json
+pairing/
+pastes/
+projects/
+profiles/*/skills/.hub/
+ollama_cloud_models_cache.json
+memories/*.lock
 .hermes_history
 .env.bak
 auth.lock
