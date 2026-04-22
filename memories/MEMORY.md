@@ -6,7 +6,7 @@ _重要的信息、决策和偏好，需要长期记住的内容。_
 §
 🧠 我的身份: **风格**: 专业、高效、不废话，有事说事；既严格又支持；默认用中文回复阿布
 §
-🧠 我的身份: **签名**: 📋
+阿布偏好 Git 自动备份提交信息不用 emoji，统一用纯中文模板。
 §
 👤 用户信息（阿布） > 核心档案: **名字**: 阿布
 §
@@ -74,11 +74,7 @@ _重要的信息、决策和偏好，需要长期记住的内容。_
 §
 👤 用户信息（阿布） > 重要认知: 裸辞需要准备，不能冲动
 §
-⚙️ 系统配置 > Hermes 环境: **版本**: 2026.2.26
-§
-⚙️ 系统配置 > Hermes 环境: **主机**: VM-0-3-opencloudos (Linux x64)
-§
-⚙️ Hermes: 全局 `/root/.hermes` 的 Feishu 默认 bot 通常是“Hermes助理”；但朋友圈文案的定时任务发送方是“笔墨内容官”，这是正确配置，不是异常。
+⚙️ Hermes: 全局 `/root/.hermes` 的 Feishu 默认 bot 是“Hermes助理”；Git/合并 cron 用它发。朋友圈文案定时任务由“笔墨内容官”发送是正确配置。
 §
 🎯 进行中的项目 > 阿布的一人公司建设: **目标**: 1年裸辞，副业月入1万
 §
@@ -88,12 +84,12 @@ _重要的信息、决策和偏好，需要长期记住的内容。_
 §
 阿布要求：增删 agent 时，我自动维护服务和脚本。
 §
-📝 学习记录: 小红书笔记制作效率是最大瓶颈
-§
-🔧 Hermes claw migrate: `hermes claw migrate` 命令真实存在（/root/.hermes/hermes-agent/hermes_cli/claw.py）。迁移 SOUL.md、MEMORY.md、Skills、模型配置、平台设置等。API Keys 默认不迁移，需加 --migrate-secrets。飞书配置需单独处理（Hermes 有 feishu.py 网关，但配置方式不同）。
+Hermes claw migrate 可迁移 SOUL/MEMORY/Skills/模型与平台配置；API keys 默认不迁移，需 `--migrate-secrets`；飞书配置常需单独处理。
 §
 👤 用户信息（阿布） > 当前项目优先级: **小红书AI虚拟资料** — 主要发力点（卡点在笔记制作）
 §
 👤 用户信息（阿布） > 当前项目优先级: **闲鱼AI智能体** — 现金牛但需优化（定价、转化率）
 §
 👤 用户信息（阿布） > 当前项目优先级: **拼多多** — 低维护，保留
+§
+阿布偏好 `/root/.hermes` dev→master：23:05 自动建/复用 PR，23:08 只提醒不自动 merge；明确指令后才合并。飞书群回执优先卡片、少走 skill。切 profile 到 openai-codex 时，要同时检查该 profile 的 auth.json，并用 `HERMES_HOME=/root/.hermes/profiles/<profile> hermes chat` 实测。

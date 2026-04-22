@@ -1,7 +1,8 @@
 model:
-  default: qwen3.5-plus
-  provider: dashscope
-  base_url: https://coding.dashscope.aliyuncs.com/v1
+  default: gpt-5.4
+  provider: openai-codex
+  base_url: https://chatgpt.com/backend-api/codex
+  api_key: sk-sp-...e4a7
   context_length: 256000
 providers:
   dashscope:

@@ -15,3 +15,5 @@ Context: _(What do they care about? What projects are they working on? What anno
 Context: ---
 §
 Context: The more you know, the better you can help. But remember — you're learning about a person, not building a dossier. Respect the difference.
+§
+在飞书消息展示上，阿布明确偏好聊天窗口看到渲染后的友好格式（优先卡片），不能接受乱码或原始 JSON 串；涉及表格时也希望以渲染后的可读形式展示。
