@@ -231,6 +231,50 @@ So for live Feishu verification, do **not** assume `run` means "already sent".
    - `last_run_at`
 6. Only remove the test job **after** execution is confirmed.
 
+### New user-facing validation lesson: never expose raw card JSON when the user expects a rendered card
+
+A later live-debugging round exposed an important practical difference between:
+
+- **internal validation**: checking whether cron output contains valid Feishu card JSON
+- **user-facing validation**: showing the user an actually rendered card in chat
+
+If the user explicitly wants to *see the rendered card* and dislikes raw JSON strings, then a cron verification path is not sufficient unless you have confirmed that this exact path renders correctly in chat.
+
+#### Practical rule
+
+If a test run causes the user to see raw JSON in the chat window, treat that as a failed validation even if the payload itself is schema-valid.
+
+In that case:
+
+1. keep the cron/output file for debugging
+2. inspect the generated JSON
+3. then send a **direct rendered Feishu card** through the adapter for user review
+4. only after the user confirms the rendered card should you finalize the recurring cron prompt/template
+
+#### Reliable fallback for Feishu card preview
+
+When cron-based preview is exposing JSON strings but you still need to show the user the real visual result:
+
+1. load live context data (for example from the profile script)
+2. build the final Card JSON 2.0 payload in Python
+3. instantiate `FeishuAdapter`
+4. `await adapter.connect()`
+5. `await adapter.send_card(chat_id, card)`
+6. optionally `await adapter.disconnect()`
+
+Important finding from live use:
+
+- calling `send_card(...)` without connecting first returned `Not connected`
+- the working path was:
+  - `await adapter.connect()`
+  - `await adapter.send_card(...)`
+- once connected, live card delivery succeeded and returned a real `message_id`
+
+#### Decision rule
+
+- If the goal is **transport/debugging** → cron output inspection is fine
+- If the goal is **show the user a real rendered card right now** → prefer direct `FeishuAdapter.send_card()` preview after connecting
+
 ### Reliable manual scheduler trigger
 
 When doing diagnosis in the local Hermes repo, a reliable way to force processing is:
@@ -330,23 +374,44 @@ Use this approach instead:
 
 ### Recommended skeleton for investment monitoring cards with true tables
 
-- `div`: `**🌐 大盘实时概览**`
+- `div`: `**【🌐 大盘实时概览】**`
 - `div`: 3 index lines + 1 summary line
 - `hr`
-- `div`: `**📋 持仓实时监控**`
+- `div`: `**【📋 持仓实时监控】**`
 - `table`: holdings table
-- `note`: holdings summary line
+- `div`: holdings summary line
 - `hr`
-- `div`: `**📐 加仓距离更新**`
+- `div`: `**【📐 加仓距离更新】**`
 - `table`: rebuy-distance table
 - `hr`
-- `div`: `**⚡ 异动提醒**`
+- `div`: `**【⚡ 异动提醒】**`
+- `div`: alerts body
 - `hr`
-- `div`: `**💡 操作建议**`
+- `div`: `**【💡 操作建议】**`
+- `div`: actions body
 - `hr`
-- `note`: risk level / reason / next check time
+- `div`: `**【⚠️ 风险提示】**`
+- `div`: risk level / reason / next check time
 
-### Example table shape
+### Important Feishu Card 2.0 compatibility findings from live debugging
+
+Two schema-valid looking patterns turned out to be rejected by Feishu at send time:
+
+1. **Do not use `note` in schema 2.0 cards**
+   - Live Feishu error:
+     - `unsupported tag note`
+     - `cards of schema V2 no longer support this capability`
+   - Practical rule:
+     - in schema 2.0 cron cards, use `div` instead of `note` for holdings summary and bottom risk line
+
+2. **Do not include `width` inside `table.columns`**
+   - Live Feishu error pointed at the table column index when `width` was present
+   - A minimal table succeeded only after removing `width`
+   - Practical rule:
+     - keep `columns` to fields like `name`, `display_name`, `data_type`
+     - avoid speculative sizing fields unless re-verified against current Feishu behavior
+
+### Example table shape that actually passed live Feishu delivery
 
 ```json
 {
@@ -364,14 +429,116 @@ Use this approach instead:
     "lines": 1
   },
   "columns": [
-    {"name": "name", "display_name": "标的", "data_type": "text", "width": "120px"},
-    {"name": "price", "display_name": "现价", "data_type": "text", "width": "72px"}
+    {"name": "name", "display_name": "标的", "data_type": "text"},
+    {"name": "price", "display_name": "现价", "data_type": "text"}
   ],
   "rows": [
     {"name": "消费50ETF", "price": "1.103"}
   ]
 }
 ```
+
+### New production lesson: inject real market data before card generation
+
+For investment monitoring cron jobs, prompt instructions alone are not enough to guarantee truthful numbers.
+
+A reusable pattern that worked here:
+
+### New maintainability lesson: externalize holdings into a profile data file
+
+When an investment cron card starts as a prompt or script with hard-coded holdings, that approach becomes fragile fast. The reusable fix is to split the system into **three layers**:
+
+1. **Profile data file** under `HERMES_HOME`
+   - store user-maintained investment data outside the repo
+   - recommended path used here:
+     - `~/.hermes/profiles/<profile>/data/investment/portfolio.json`
+2. **Testable repo module**
+   - put shared loading / validation / market-data / calculation logic in a normal source module
+   - example used here:
+     - `cron/investment_monitor.py`
+3. **Thin cron script wrapper**
+   - keep the cron-attached script minimal
+   - it should only load/ensure the data file, call the module, and print JSON
+   - example used here:
+     - `~/.hermes/profiles/<profile>/scripts/intraday_monitor_context.py`
+
+#### Why this split is the right default
+
+Use this pattern when the user says any variant of:
+
+- “持仓配置表应该有个地方可以专门存储”
+- “后面我还会增加或修改持仓数据”
+- “还会存别的一些投资数据”
+
+Benefits:
+
+- holdings are no longer buried in prompt text or script constants
+- the user can edit a single profile data file without touching repo code
+- cron jobs keep the same script entrypoint, so production scheduling changes are minimal
+- core logic becomes unit-testable
+- future expansion is easier (`watchlist`, `cash_plan`, `risk_rules`, `strategy_notes`, etc.)
+
+#### Recommended initial JSON shape
+
+Start simple with one file containing at least:
+
+```json
+{
+  "meta": {},
+  "indices": [],
+  "holdings": []
+}
+```
+
+This is enough for the first migration. If the data grows later, split into multiple files only after the single-file shape becomes unwieldy.
+
+#### Implementation workflow that worked
+
+1. Inspect the current cron script and identify what is hard-coded vs dynamic.
+2. Confirm the real production job and script path before refactoring.
+3. Add tests first for:
+   - resolving the portfolio path from `HERMES_HOME`
+   - loading external JSON config
+   - building the monitor context from config-driven holdings
+4. Create the shared source module in the repo.
+5. Move portfolio defaults + loading + generation logic into that module.
+6. Rewrite the profile cron script into a thin wrapper.
+7. Create the profile data file under `data/investment/portfolio.json`.
+8. Run the script directly and verify output now reflects external config + live market data.
+
+#### Testing lesson
+
+A practical minimum regression suite for this refactor is:
+
+- `get_portfolio_path()` uses `HERMES_HOME`
+- `load_portfolio_config()` reads external JSON correctly
+- generated monitor context uses holdings from the config file, not in-script constants
+
+This catches the main failure mode where the refactor looks complete but the cron output still secretly depends on hard-coded holdings.
+
+#### Operational note
+
+Prefer storing investment configuration under the **profile** (`~/.hermes/profiles/...`) rather than in the repo because it is user data, not source code. Keep the reusable logic in the repo, keep the editable portfolio data outside it.
+
+For investment monitoring cron jobs, prompt instructions alone are not enough to guarantee truthful numbers.
+
+A reusable pattern that worked here:
+
+1. Add a cron `script` that fetches real-time market/index/holding data before the run.
+2. Print compact JSON containing:
+   - index prices, pct changes, turnover
+   - per-holding current price, day change, pnl, trigger state, distance-to-target
+   - summary totals such as total market value and total pnl
+3. In the cron prompt, explicitly require the model to:
+   - use only injected script data
+   - compute card text, alerts, and action lines from that data
+   - mark missing fields as `未获取` / `数据暂缺` instead of inventing values
+
+This is preferable whenever the user says any variant of:
+
+- “数据一定要根据真实数据计算”
+- “不要用示例数据”
+- “不能编造价格/盈亏/触发情况”
 
 ### Decision rule discovered from live iteration
 
@@ -422,6 +589,75 @@ then stop polishing incrementally and do this instead:
 
 For 盘中监控 cards, the user preferred the compact structure below over more explanatory versions:
 
+### New transport lesson: Feishu true `table` requires Card JSON 2.0 passthrough
+
+A later debugging round found an important gap in Hermes cron Feishu delivery:
+
+- Feishu **real table components** are supported in **Card JSON 2.0**
+- JSON 2.0 cards use:
+  - `card.schema = "2.0"`
+  - `card.body.elements`
+  - `{"tag": "table", ...}` components
+- Hermes originally only recognized embedded cards shaped like:
+  - `header + elements` (legacy shape)
+- Result: when a cron job output a valid JSON 2.0 card, Hermes failed to recognize it as a card payload and delivered the entire JSON as plain text / JSON string in Feishu
+
+#### Practical rule
+
+If the user explicitly wants:
+
+- a **real table**, not a table-like column layout
+- stronger section headers
+- richer but still structured monitoring content
+
+then you should prefer **Feishu Card JSON 2.0** with real `table` components.
+
+#### Required Hermes support check
+
+Before relying on JSON 2.0 cards in cron delivery, verify `cron/scheduler.py` accepts both shapes:
+
+1. Legacy embedded card:
+   - `header`
+   - `elements`
+2. JSON 2.0 embedded card:
+   - `schema: "2.0"`
+   - `header`
+   - `body.elements`
+
+In this case, `_extract_embedded_feishu_card(...)` had to be extended to accept:
+
+- `payload["card"]` where `card["schema"] == "2.0"`
+- `card["body"]["elements"]` is a list
+
+and to keep legacy support for `card["elements"]`.
+
+#### Regression tests worth keeping
+
+When fixing JSON 2.0 Feishu card passthrough, add tests for both:
+
+- builder acceptance of a schema 2.0 card payload
+- delivery passthrough of a schema 2.0 raw interactive card payload
+
+Typical assertions:
+
+- `card["schema"] == "2.0"`
+- `card["body"]["elements"]` exists
+- one of the elements has `tag == "table"`
+- Feishu delivery sends `structured_payload["feishu_card"]`
+- plain text argument is empty (`args[3] == ""` in current tests)
+
+#### Feishu doc finding to remember
+
+Feishu docs confirm standard Feishu cards support a real `table` component in Card JSON 2.0. Relevant facts discovered:
+
+- component tag is `table`
+- it lives under card JSON 2.0 `body.elements`
+- each card can include up to 5 table components
+- schema 2.0 cards are supported from Feishu client 7.20+
+- older clients may show fallback upgrade prompts
+
+This matters because if the user says “不是要表格化布局，是要求表格”, prompt tweaks alone are not enough — you must switch to schema 2.0 true table cards and ensure Hermes transports them correctly.
+
 - `🌐 大盘实时概览` = 3 index lines + 1 summary line
 - `📋 持仓实时监控` = one holding per line + one summary line
 - `⚡ 异动提醒` = only true anomalies
@@ -459,11 +695,94 @@ Before finishing:
 - [ ] `deliver` target (`origin` vs explicit Feishu target) was considered during diagnosis
 - [ ] `[SILENT]` behavior is preserved where needed
 
-## Example reusable conclusion
+## New strongest lesson for investment cron jobs: prompt-fixed cards are still unstable
 
-When a Feishu cron message looks wrong in Hermes, the default fix is:
+A later debugging round established a more durable rule for recurring investment cards:
+
+- a prompt can describe a fixed template
+- but if the model still emits the **final** Feishu card JSON, the transport remains fragile
+
+Observed live behavior:
+
+- some runs rendered raw JSON strings in chat
+- some runs produced schema-valid-looking but delivery-invalid payloads
+- switching to markdown-only output stopped JSON strings but also removed real tables
+
+### Updated decision rule
+
+A later production issue exposed another important failure mode in deterministic card rendering:
+
+- the scheduler-side investment card builder was doing a **second live quote fetch at delivery time**
+- when that refetch failed transiently, `_build_investment_feishu_card(...)` returned `None`
+- Hermes then fell back to the generic markdown card path
+- user-visible symptom: **real tables disappeared**, and prompt-authored titles like `【模块名】` came back again
+
+#### Practical fix rule
+
+For investment cron jobs with code-built Feishu cards:
+
+1. do not allow quote-refetch failure to drop back to the generic markdown wrapper
+2. retry live quote loading a few times
+3. if live data still fails, keep sending the **deterministic table card** using config-only fallback data
+4. explicitly show `数据暂缺` / `—` for unavailable market fields
+
+The key acceptance rule is:
+
+- transient market-data fetch failure may degrade **data freshness**
+- but it must **not** degrade the card back into non-table markdown layout
+
+#### Additional compatibility lesson from live Feishu DM testing
+
+A later direct-send verification showed another issue:
+
+- the bot successfully sent a schema 2.0 card containing real `table` elements
+- transport succeeded with a valid `message_id`
+- but the user still did **not** see visible tables in the Feishu chat client
+
+Practical implication:
+
+- transport success does **not** guarantee user-visible `table` rendering
+- some Feishu clients / contexts may silently fail to display `table` blocks as expected
+
+When the user reports "表格没有了" even after confirmed card passthrough success, use a **compatibility grid fallback** for the affected card:
+
+1. keep the deterministic scheduler-built card path
+2. replace the invisible `table` block with multiple `div + lark_md` rows
+3. render a bold header row plus one line per record using separators like `｜`
+4. preserve module titles, row ordering, and real data values
+5. prefer this fallback for the specific task/card the user is actually reading, rather than globally assuming `table` works everywhere
+
+This is not a true Feishu native table, but it is the safest user-visible fallback when native `table` transport succeeds yet rendering still fails in chat.
+
+For ordinary readable reports, the old default still stands:
 
 1. stop generating Feishu card JSON from the model
 2. stop using Markdown tables
 3. output concise bullet-based Markdown
 4. let Hermes cron wrap it into the Feishu card automatically
+
+But for **investment monitoring jobs that must keep real tables and a stable approved layout**, the better fix is different:
+
+1. keep script-injected structured data
+2. stop asking the model to author the final card JSON
+3. add a deterministic card builder in `cron/scheduler.py`
+4. have `_build_feishu_cron_card(...)` return that code-built schema `2.0` card for the target jobs before embedded-card extraction
+5. use code-generated `table` components instead of markdown or prompt-authored JSON
+
+### Practical acceptance bar update
+
+For this class of job, success is only:
+
+- Feishu chat shows a rendered interactive card
+- tables are still present as real `table` components
+- no raw JSON string is visible to the user
+- delivery reports `delivery_error: None`
+
+If markdown auto-wrap renders but tables disappear, that is only a temporary transport workaround, **not** a final fix.
+
+## Example reusable conclusion
+
+When a Feishu cron message looks wrong in Hermes, choose the fix by requirement:
+
+- if readability is enough → markdown output + Hermes auto-wrap
+- if the user demands rendered card + true tables + stable repeatability → deterministic code-built Feishu Card 2.0 in scheduler

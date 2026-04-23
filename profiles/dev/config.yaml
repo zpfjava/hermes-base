@@ -1,5 +1,5 @@
 model:
-  default: qwen3.5-plus
+  default: glm-5
   provider: dashscope
   base_url: https://coding.dashscope.aliyuncs.com/v1
   context_length: 256000

@@ -18,15 +18,15 @@
       "schedule_display": "0 8 * * *",
       "repeat": {
         "times": null,
-        "completed": 2
+        "completed": 4
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-20T16:31:15.111168+08:00",
-      "next_run_at": "2026-04-22T08:00:00+08:00",
-      "last_run_at": "2026-04-21T23:08:08.341531+08:00",
+      "next_run_at": "2026-04-24T08:00:00+08:00",
+      "last_run_at": "2026-04-23T08:21:22.556185+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -58,15 +58,15 @@
       "schedule_display": "0 8 * * *",
       "repeat": {
         "times": null,
-        "completed": 1
+        "completed": 3
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-20T16:31:21.134283+08:00",
-      "next_run_at": "2026-04-22T08:00:00+08:00",
-      "last_run_at": "2026-04-21T08:04:21.890897+08:00",
+      "next_run_at": "2026-04-24T08:00:00+08:00",
+      "last_run_at": "2026-04-23T08:22:43.511471+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -100,15 +100,15 @@
       "schedule_display": "0 23 * * *",
       "repeat": {
         "times": null,
-        "completed": 2
+        "completed": 4
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-22T01:15:10.916332+08:00",
-      "next_run_at": "2026-04-22T23:00:00+08:00",
-      "last_run_at": "2026-04-22T01:22:21.624408+08:00",
+      "next_run_at": "2026-04-24T23:00:00+08:00",
+      "last_run_at": "2026-04-23T23:01:26.011601+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -125,7 +125,7 @@
     {
       "id": "d7a414512a6f",
       "name": "Hermes Git \u5907\u4efd - \u9636\u6bb52: \u81ea\u52a8\u63d0\u4ea4",
-      "prompt": "\u4f60\u662f Hermes Git \u81ea\u52a8\u5907\u4efd\u4efb\u52a1\u7684\u6267\u884c\u8005\u3002\u53ea\u5141\u8bb8\u64cd\u4f5c\u4ed3\u5e93 `/root/.hermes`\uff0c\u76ee\u6807\u5206\u652f\u56fa\u5b9a\u4e3a `master`\uff0c\u8fdc\u7a0b\u56fa\u5b9a\u4e3a `origin`\uff0c\u76ee\u6807\u4ed3\u5e93\u5e94\u4e3a `https://github.com/zpfjava/hermes-base.git`\u3002\n\n\u6267\u884c\u8981\u6c42\uff1a\n1. \u5148\u68c0\u67e5 `/root/.hermes` \u662f\u5426\u662f git \u4ed3\u5e93\uff1b\u82e5\u4e0d\u662f\uff0c\u76f4\u63a5\u62a5\u544a\u5931\u8d25\u3002\n2. \u68c0\u67e5\u5f53\u524d\u5206\u652f\u662f\u5426\u4e3a `master`\uff1b\u82e5\u4e0d\u662f\uff0c\u76f4\u63a5\u62a5\u544a\u5931\u8d25\uff0c\u4e0d\u8981\u5207\u5206\u652f\u3002\n3. \u68c0\u67e5 `origin` \u662f\u5426\u5b58\u5728\u4e14 URL \u4e3a `https://github.com/zpfjava/hermes-base.git`\uff1b\u82e5\u4e0d\u5339\u914d\uff0c\u76f4\u63a5\u62a5\u544a\u5931\u8d25\uff0c\u4e0d\u8981\u6539\u8fdc\u7a0b\u3002\n4. \u5907\u4efd\u65f6\u5fc5\u987b\u8df3\u8fc7\u4ee5\u4e0b\u5185\u5bb9\uff0c\u907f\u514d\u518d\u6b21\u5361\u6b7b\u6216\u8bef\u7eb3\u5165\u5d4c\u5957\u4ed3\u5e93/\u5927\u4f53\u79ef\u76ee\u5f55\uff1a\n   - `hermes-agent/`\n   - `migration/`\n   - `workspaces/`\n   - `checkpoints/`\n   - `bin/`\n   - `logs/`\n   - `sessions/`\n   - `cache/`\n   - `image_cache/`\n   - `audio_cache/`\n   - `cron/`\n   - \u4efb\u4f55\u5d4c\u5957 git \u4ed3\u5e93\n5. \u4f18\u5148\u5c0a\u91cd\u73b0\u6709 `.gitignore`\u3002\u5728\u6b64\u57fa\u7840\u4e0a\uff0c\u53ea\u63d0\u4ea4\u5b89\u5168\u4e14\u5fc5\u8981\u7684 Hermes \u914d\u7f6e/\u811a\u672c/\u8bb0\u5fc6/skills/profile \u7b49\u53d8\u66f4\uff1b\u5982\u679c\u6ca1\u6709\u53ef\u63d0\u4ea4\u53d8\u66f4\uff0c\u76f4\u63a5\u8f93\u51fa\u201c\u65e0\u9700\u63d0\u4ea4\uff0c\u672c\u6b21\u8df3\u8fc7\u201d\u3002\n6. \u5982\u679c\u4ed3\u5e93\u8fd8\u6ca1\u6709\u63d0\u4ea4\u5386\u53f2\uff0c\u4e5f\u8981\u517c\u5bb9\u9996\u6b21\u63d0\u4ea4\u573a\u666f\u3002\n7. \u63d0\u4ea4\u4fe1\u606f\u683c\u5f0f\uff1a`\ud83e\udd16 Hermes \u81ea\u52a8\u5907\u4efd YYYY-MM-DD HH:MM`\u3002\n8. \u6210\u529f\u63d0\u4ea4\u540e\u6267\u884c `git push origin master`\u3002\u5982\u679c already up-to-date\uff0c\u4e5f\u8981\u660e\u786e\u8bf4\u660e\u3002\n9. \u8f93\u51fa\u7ed3\u6784\u5fc5\u987b\u5305\u542b\uff1a\n   - \u4ed3\u5e93\u72b6\u6001\u6458\u8981\n   - \u672c\u6b21\u7eb3\u5165\u63d0\u4ea4\u7684\u8def\u5f84\u6982\u89c8\n   - commit hash\uff08\u82e5\u6709\uff09\n   - push \u7ed3\u679c\n   - \u6700\u7ec8\u7ed3\u8bba\uff08\u6210\u529f / \u8df3\u8fc7 / \u5931\u8d25\uff09\n10. \u4e0d\u8981\u6267\u884c\u4efb\u4f55\u7834\u574f\u6027\u64cd\u4f5c\uff1a\u4e0d\u8981 reset\uff0c\u4e0d\u8981 clean\uff0c\u4e0d\u8981\u6539 remote\uff0c\u4e0d\u8981\u5207\u5206\u652f\uff0c\u4e0d\u8981\u5220\u9664\u6587\u4ef6\u3002",
+      "prompt": "\u4f60\u662f Hermes Git \u81ea\u52a8\u5907\u4efd\u4efb\u52a1\u7684\u6267\u884c\u8005\u3002\u53ea\u5141\u8bb8\u64cd\u4f5c\u4ed3\u5e93 `/root/.hermes`\uff0c\u76ee\u6807\u5206\u652f\u56fa\u5b9a\u4e3a `master`\uff0c\u8fdc\u7a0b\u56fa\u5b9a\u4e3a `origin`\uff0c\u76ee\u6807\u4ed3\u5e93\u5e94\u4e3a `https://github.com/zpfjava/hermes-base.git`\u3002\n\n\u6267\u884c\u89c4\u5219\uff1a\n1. \u5148\u786e\u8ba4\u5f53\u524d\u76ee\u5f55\u662f Git \u4ed3\u5e93\uff1b\u4e0d\u662f\u5c31\u505c\u6b62\u5e76\u8bf4\u660e\u539f\u56e0\u3002\n2. \u68c0\u67e5\u5f53\u524d\u5206\u652f\u5fc5\u987b\u662f `master`\uff1b\u5982\u679c\u4e0d\u662f\uff0c\u505c\u6b62\u5e76\u8bf4\u660e\u539f\u56e0\u3002\n3. \u68c0\u67e5 `origin` \u5fc5\u987b\u5b58\u5728\uff0c\u4e14 URL \u5fc5\u987b\u662f `https://github.com/zpfjava/hermes-base.git`\uff1b\u4e0d\u5339\u914d\u5c31\u505c\u6b62\u5e76\u8bf4\u660e\u539f\u56e0\u3002\n4. \u53ea\u505a\u5b89\u5168\u5907\u4efd\uff1a\n   - \u5141\u8bb8\u63d0\u4ea4 Hermes \u81ea\u8eab\u914d\u7f6e\u3001profiles\u3001skills\u3001scripts\u3001memories\u3001cron/jobs.json\u3001docs \u7b49\u8f7b\u91cf\u6587\u4ef6\u3002\n   - \u4e0d\u8981\u628a\u5927\u76ee\u5f55\u6216\u8fd0\u884c\u6001\u5783\u573e\u5377\u8fdb\u53bb\uff1b\u5982\u53d1\u73b0\u8fd9\u4e9b\u76ee\u5f55/\u5185\u5bb9\uff0c\u5fc5\u987b\u8df3\u8fc7\uff1a`migration/`\u3001`workspaces/`\u3001`checkpoints/`\u3001`cache/`\u3001`audio_cache/`\u3001`image_cache/`\u3001`logs/`\u3001`sessions/`\u3001`sandboxes/`\u3001`profiles/*/cron/output/`\u3001\u6570\u636e\u5e93\u6587\u4ef6\u3001lock \u6587\u4ef6\u3001\u5404\u79cd\u8fd0\u884c\u6001 token/sync \u6587\u4ef6\u3002\n   - \u5982\u679c\u9047\u5230\u5d4c\u5957 Git \u4ed3\u5e93\uff08\u5982 `hermes-agent/`\uff09\uff0c\u4e0d\u8981\u9012\u5f52\u7eb3\u5165\u3002\n5. \u63d0\u4ea4\u524d\u5148\u6267\u884c\uff1a\n   - `git status --short`\n   - \u53ea\u5c06\u9700\u8981\u5907\u4efd\u7684\u6587\u4ef6\u52a0\u5165\u6682\u5b58\u533a\u3002\n6. \u5982\u679c\u6682\u5b58\u533a\u4e3a\u7a7a\uff0c\u76f4\u63a5\u8f93\u51fa\u201c\u65e0\u53ef\u5907\u4efd\u53d8\u66f4\uff0c\u672c\u6b21\u8df3\u8fc7\u201d\uff0c\u4e0d\u8981\u62a5\u9519\u3002\n7. \u5982\u679c\u6709\u53d8\u66f4\uff0c\u63d0\u4ea4\u4fe1\u606f\u5fc5\u987b\u56fa\u5b9a\u4f7f\u7528\u8fd9\u4e2a\u683c\u5f0f\uff0c\u4e0d\u8981\u52a0 emoji\uff0c\u4e0d\u8981\u82f1\u6587\u6a21\u677f\uff0c\u4e0d\u8981\u989d\u5916\u524d\u540e\u7f00\uff1a\n   - `Hermes\u81ea\u52a8\u5907\u4efd YYYY-MM-DD HH:MM`\n   \u4f8b\u5982\uff1a`Hermes\u81ea\u52a8\u5907\u4efd 2026-04-22 02:20`\n8. commit \u540e\u6267\u884c\uff1a`git push origin master`\n9. \u6700\u7ec8\u8f93\u51fa\u5fc5\u987b\u6e05\u695a\u8bf4\u660e\uff1a\n   - \u662f\u5426\u53d1\u73b0\u53d8\u66f4\n   - \u5b9e\u9645\u63d0\u4ea4 hash\uff08\u5982\u679c\u6709\uff09\n   - push \u662f\u5426\u6210\u529f\n   - \u5982\u679c\u8df3\u8fc7\uff0c\u8bf4\u660e\u8df3\u8fc7\u539f\u56e0\n10. \u7981\u6b62\u4efb\u4f55 destructive \u64cd\u4f5c\uff1a\u4e0d\u8981 reset --hard\u3001\u4e0d\u8981 clean -fd\u3001\u4e0d\u8981 rebase\u3001\u4e0d\u8981 force push\u3001\u4e0d\u8981\u6539 remote\u3002",
       "skills": [
         "github-repo-management"
       ],
@@ -142,15 +142,95 @@
       "schedule_display": "3 23 * * *",
       "repeat": {
         "times": null,
-        "completed": 2
+        "completed": 4
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-22T01:15:23.872838+08:00",
-      "next_run_at": "2026-04-22T23:03:00+08:00",
-      "last_run_at": "2026-04-22T02:19:35.557461+08:00",
+      "next_run_at": "2026-04-24T23:03:00+08:00",
+      "last_run_at": "2026-04-22T23:05:21.953935+08:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "feishu:oc_f0d7f9a753c626ad3562846e0584cf69",
+      "origin": {
+        "platform": "weixin",
+        "chat_id": "o9cq809nd9e9DZFNMdgpCqbemmA8@im.wechat",
+        "chat_name": null,
+        "thread_id": null
+      },
+      "profile": "default",
+      "hermes_home": "/root/.hermes"
+    },
+    {
+      "id": "709d0b73ae04",
+      "name": "\u6bcf\u65e5\u5408\u5e76 dev \u2192 master",
+      "prompt": "\u4f60\u662f Hermes \u4ed3\u5e93\u7684\u6bcf\u65e5\u5206\u9636\u6bb5\u5408\u5e76\u4efb\u52a1\u6267\u884c\u8005\u3002\u53ea\u5141\u8bb8\u64cd\u4f5c\u4ed3\u5e93 `/root/.hermes`\uff0c\u8fdc\u7a0b\u56fa\u5b9a\u4e3a `origin`\uff0c\u6e90\u5206\u652f\u56fa\u5b9a\u4e3a `dev`\uff0c\u76ee\u6807\u5206\u652f\u56fa\u5b9a\u4e3a `master`\uff0cGitHub \u4ed3\u5e93\u56fa\u5b9a\u4e3a `zpfjava/hermes-base`\u3002\n\n\u4efb\u52a1\u76ee\u6807\uff1a\u590d\u523b\u65e7 OpenClaw \u6a21\u5f0f\u3002\u6bcf\u5929\u6267\u884c\u4e00\u6b21 dev\u2192master \u7684\u5b89\u5168\u68c0\u67e5\u4e0e\u5408\u5e76\u51c6\u5907\uff0c\u53ea\u521b\u5efa/\u590d\u7528 PR \u5e76\u6c47\u62a5\u7ed3\u679c\uff0c\u4e0d\u81ea\u52a8\u5408\u5e76\uff0c\u4e0d\u8981\u6c42\u6253\u6807\u7b7e\uff0c\u4e0d\u542f\u7528 auto-merge\u3002\n\n\u4e25\u683c\u6b65\u9aa4\uff1a\n1. \u9884\u68c0\n- \u786e\u8ba4\u4ed3\u5e93\u3001remote\u3001origin/dev\u3001origin/master \u6b63\u5e38\n- \u6267\u884c `git fetch origin --prune`\n\n2. \u5dee\u5f02\u68c0\u67e5\n- \u5bf9\u6bd4 `origin/master..origin/dev`\n- \u5982\u679c\u6ca1\u6709\u65b0\u63d0\u4ea4\uff0c\u4e25\u683c\u8f93\u51fa\uff1a\n\n\u3010\u9884\u5ba1\u7ed3\u679c\u3011\u65e0\u9700\u5408\u5e76\nPR\uff1a\u65e0\n\u6539\u52a8\uff1a0 \u4e2a\u63d0\u4ea4\n\u98ce\u9669\uff1a\u4f4e\n\u4e0b\u4e00\u6b65\uff1a\u65e0\u9700\u5904\u7406\n\n3. \u5982\u679c\u6709\u5dee\u5f02\n- \u7edf\u8ba1\u63d0\u4ea4\u6570\n- \u63d0\u70bc 2-3 \u6761\u201c\u672c\u6b21\u6539\u4e86\u4ec0\u4e48\u201d\uff0c\u5fc5\u987b\u662f\u4eba\u8bdd\u603b\u7ed3\uff0c\u4e0d\u8981\u53ea\u5217\u6587\u4ef6\u540d\n- \u5217\u51fa\u6700\u591a 3 \u4e2a\u5173\u952e\u6587\u4ef6\n- \u98ce\u9669\u5224\u65ad\uff1a\u4f4e/\u4e2d/\u9ad8\n\n4. PR \u5904\u7406\n- \u5148\u68c0\u67e5\u662f\u5426\u5df2\u6709 open PR\n- \u6709\u5219\u590d\u7528\uff1b\u65e0\u5219\u521b\u5efa\n- \u6807\u9898\u56fa\u5b9a\uff1a`Daily merge: YYYY-MM-DD dev \u2192 master`\n\n5. \u6700\u7ec8\u8f93\u51fa\u5fc5\u987b\u4e25\u683c\u4f7f\u7528\u4e0b\u9762\u6a21\u677f\uff0c\u4e0d\u8981\u52a0\u4efb\u4f55\u989d\u5916\u8bf4\u660e\uff1a\n\n\u3010\u9884\u5ba1\u7ed3\u679c\u3011\u5df2\u521b\u5efaPR / \u5df2\u590d\u7528PR\nPR\uff1a#\u7f16\u53f7\n\u6539\u52a8\uff1aN \u4e2a\u63d0\u4ea4\n\u98ce\u9669\uff1a\u4f4e / \u4e2d / \u9ad8\n\n\u672c\u6b21\u6539\u4e86\u4ec0\u4e48\n1) \u8981\u70b91\n2) \u8981\u70b92\n3) \u8981\u70b93\n\n\u5173\u952e\u6587\u4ef6\n- \u6587\u4ef61\n- \u6587\u4ef62\n- \u6587\u4ef63\n\n\u4e0b\u4e00\u6b65\n- \u67e5\u770b PR\uff1aPR\u94fe\u63a5\n- \u786e\u8ba4\u65e0\u8bef\u540e\u56de\u590d\uff1a\u5408\u5e76 PR #\u7f16\u53f7\n- \u5f53\u524d\u4e0d\u4f1a\u81ea\u52a8\u5408\u5e76\n\n6. \u7981\u6b62 merge\u3001auto-merge\u3001force push\u3001reset --hard\u3001clean -fd\u3001\u5173\u95edPR\u3001\u5220dev\u5206\u652f",
+      "skills": [],
+      "skill": null,
+      "model": "qwen3.5-plus",
+      "provider": "dashscope",
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "5 23 * * *",
+        "display": "5 23 * * *"
+      },
+      "schedule_display": "5 23 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 8
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-22T02:37:48.170965+08:00",
+      "next_run_at": "2026-04-23T23:05:00+08:00",
+      "last_run_at": "2026-04-22T23:07:19.979990+08:00",
+      "last_status": "ok",
+      "last_error": null,
+      "last_delivery_error": null,
+      "deliver": "feishu:oc_f0d7f9a753c626ad3562846e0584cf69",
+      "origin": {
+        "platform": "weixin",
+        "chat_id": "o9cq809nd9e9DZFNMdgpCqbemmA8@im.wechat",
+        "chat_name": null,
+        "thread_id": null
+      },
+      "profile": "default",
+      "hermes_home": "/root/.hermes"
+    },
+    {
+      "id": "62f808b790a8",
+      "name": "\u6bcf\u65e5\u6267\u884c dev \u2192 master \u5408\u5e76",
+      "prompt": "\u4f60\u662f Hermes \u4ed3\u5e93\u7684 nightly \u5408\u5e76\u63d0\u9192\u4efb\u52a1\u6267\u884c\u8005\u3002\u53ea\u5141\u8bb8\u64cd\u4f5c\u4ed3\u5e93 `/root/.hermes`\uff0c\u8fdc\u7a0b\u56fa\u5b9a\u4e3a `origin`\uff0c\u6e90\u5206\u652f\u56fa\u5b9a\u4e3a `dev`\uff0c\u76ee\u6807\u5206\u652f\u56fa\u5b9a\u4e3a `master`\uff0cGitHub \u4ed3\u5e93\u56fa\u5b9a\u4e3a `zpfjava/hermes-base`\u3002\n\n\u4efb\u52a1\u76ee\u6807\uff1a\u590d\u523b\u65e7 OpenClaw \u6a21\u5f0f\u3002\u6bcf\u5929\u53ea\u505a\u201c\u68c0\u67e5 open PR / \u6c47\u62a5\u72b6\u6001 / \u7ed9\u51fa\u662f\u5426\u5efa\u8bae\u5408\u5e76 / \u63d0\u9192\u4e0b\u4e00\u6b65\u52a8\u4f5c\u201d\uff0c\u4e0d\u6267\u884c merge\uff0c\u4e0d\u542f\u7528 auto-merge\uff0c\u4e0d\u4fee\u6539\u5206\u652f\u3002\n\n\u4e25\u683c\u6b65\u9aa4\uff1a\n1. \u9884\u68c0\n- \u786e\u8ba4\u4ed3\u5e93\u3001remote\u3001origin/dev\u3001origin/master \u6b63\u5e38\n- \u6267\u884c `git fetch origin --prune`\n\n2. \u67e5\u8be2 PR\n- \u4f7f\u7528 `gh` \u67e5\u8be2 open PR\n- \u5982\u679c\u6ca1\u6709 open PR\uff0c\u4e25\u683c\u8f93\u51fa\uff1a\n\n\u3010\u5408\u5e76\u63d0\u9192\u3011\u4eca\u665a\u65e0\u9700\u5904\u7406\nPR\uff1a\u65e0\n\u72b6\u6001\uff1a\u65e0\u5f85\u5904\u7406 PR\n\u5efa\u8bae\uff1a\u65e0\u9700\u5408\u5e76\n\u4e0b\u4e00\u6b65\uff1a\u65e0\u9700\u5904\u7406\n\n3. \u5982\u679c\u5b58\u5728 open PR\n- \u8bfb\u53d6 PR \u7f16\u53f7\u3001\u94fe\u63a5\u3001state\u3001labels\u3001mergeStateStatus\n- \u5224\u65ad\u5efa\u8bae\uff1a\u5efa\u8bae\u5408\u5e76 / \u6682\u4e0d\u5efa\u8bae\u5408\u5e76\n- \u7528 1-3 \u6761\u4eba\u8bdd\u8bf4\u660e\u6700\u8be5\u5173\u6ce8\u70b9\n- \u4e0d\u8981 merge\n\n4. \u6700\u7ec8\u8f93\u51fa\u5fc5\u987b\u4e25\u683c\u4f7f\u7528\u4e0b\u9762\u6a21\u677f\uff0c\u4e0d\u8981\u52a0\u4efb\u4f55\u989d\u5916\u8bf4\u660e\uff1a\n\n\u3010\u5408\u5e76\u63d0\u9192\u3011\u5efa\u8bae\u5408\u5e76 / \u6682\u4e0d\u5efa\u8bae\u5408\u5e76\nPR\uff1a#\u7f16\u53f7\n\u72b6\u6001\uff1aOPEN\n\u53ef\u5408\u5e76\u6027\uff1a\u53ef\u5408\u5e76 / \u6709\u51b2\u7a81 / \u5f85\u786e\u8ba4\n\u6807\u7b7e\uff1a\u6807\u7b7e1, \u6807\u7b7e2\uff1b\u82e5\u65e0\u5219\u5199\u201c\u65e0\u201d\n\n\u6700\u8be5\u5173\u6ce8\n1) \u5173\u6ce8\u70b91\n2) \u5173\u6ce8\u70b92\n3) \u5173\u6ce8\u70b93\n\n\u4e0b\u4e00\u6b65\n- \u67e5\u770b PR\uff1aPR\u94fe\u63a5\n- \u786e\u8ba4\u65e0\u8bef\u540e\u56de\u590d\uff1a\u5408\u5e76 PR #\u7f16\u53f7\n- \u5f53\u524d\u4e0d\u4f1a\u81ea\u52a8\u5408\u5e76\n\n5. \u7981\u6b62\u6267\u884c gh pr merge\u3001auto-merge\u3001force push\u3001reset --hard\u3001clean -fd\u3001\u5173\u95edPR\u3001\u5220dev\u5206\u652f",
+      "skills": [],
+      "skill": null,
+      "model": "qwen3.5-plus",
+      "provider": "dashscope",
+      "base_url": null,
+      "script": null,
+      "schedule": {
+        "kind": "cron",
+        "expr": "8 23 * * *",
+        "display": "8 23 * * *"
+      },
+      "schedule_display": "8 23 * * *",
+      "repeat": {
+        "times": null,
+        "completed": 9
+      },
+      "enabled": true,
+      "state": "scheduled",
+      "paused_at": null,
+      "paused_reason": null,
+      "created_at": "2026-04-22T08:33:59.359618+08:00",
+      "next_run_at": "2026-04-23T23:08:00+08:00",
+      "last_run_at": "2026-04-22T23:09:04.085991+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -165,5 +245,5 @@
       "hermes_home": "/root/.hermes"
     }
   ],
-  "updated_at": "2026-04-22T02:20:05.368027+08:00"
+  "updated_at": "2026-04-23T23:03:26.020270+08:00"
 }
