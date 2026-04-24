@@ -221,6 +221,21 @@ Use a two-stage response:
      - forbid explanatory prefaces / meta text
      - lock section order
      - lock title format
+     - explicitly forbid Markdown heading/list syntax if the user is seeing visible symbols in Feishu chat:
+       - `#`
+       - `##`
+       - `###`
+       - `-`
+       - `*`
+       - `>`
+       - `---`
+     - require plain-body output with fixed section titles and numbered items such as `1）2）3）` instead of bullet lists
+   - for daily report jobs (`盘前市场早报 / 投资策略全景日报 / 盘后市场晚报 / 周报`), a practical readable fallback is:
+     - first line = report title
+     - second line = one-line judgment
+     - then fixed module titles on their own lines
+     - module content uses `1）2）3）`, not bullets or Markdown tables
+   - this stopgap is especially useful when the user says messages contain too many `#` and `-` symbols in Feishu
 2. **Durable fix**
    - migrate the daily report family (`盘前市场早报 / 盘后市场晚报 / 投资策略全景日报`, and optionally `周报`) to deterministic scheduler-built cards
    - add template-lock tests for them just like the holdings-monitoring family
@@ -403,6 +418,33 @@ Encode the morning job's scope explicitly:
   - 盘前长报告
   - 盘中全量持仓监控
 - output should be short, judgment-first, and suitable for quick chat reading
+
+### Prompt rule for intraday monitor jobs
+
+For `盘中实时监控`, do not rely on the cron expression alone to decide whether a message should be sent.
+The production prompt should independently enforce trading-session silence.
+
+A reusable rule from this setup:
+
+- only allow output during Beijing time `09:30-11:30` and `13:00-15:00`
+- treat all other times as non-delivery windows, including:
+  - before `09:30`
+  - `11:30-13:00` lunch break
+  - after `15:00`
+  - weekends
+  - public market holidays
+  - temporary market suspensions
+- when outside the valid window, the final response must be exactly `[SILENT]`
+  - no explanation
+  - no extra title
+  - no trailing text
+  - no whitespace-only wrapper text
+
+Why this matters:
+
+- the cron schedule may still tick near or across boundaries
+- users interpret any off-session intraday monitor as a product failure, not a harmless extra reminder
+- exact `[SILENT]` output lets the scheduler suppress delivery cleanly
 
 A practical timing rule that worked here was:
 
@@ -770,9 +812,216 @@ Verify all of the following:
 
 - [ ] `generate_monitor_context()` shows full or improved coverage
 - [ ] ETF prices are in the correct magnitude
+- [ ] stock prices are also in the correct magnitude, not silently scaled down by 10x
 - [ ] total market value / total pnl are reasonable again
 - [ ] rebuilt formal card shows the corrected values
 - [ ] no template structure changed during the data-source fix
+
+### New magnitude-sanity rule: compare live stock prices against cost/target before trusting the card
+
+A later live verification of the official intraday monitor found a different quote-normalization failure from the ETF 10x issue:
+
+- transport and cron execution were healthy
+- output file existed and `last_status` was `ok`
+- but several **stocks** were printed about 10x too small, for example values like `1.565` against a cost around `15`, or `2.714` against a cost around `28`
+- this made downstream fields look catastrophically wrong:
+  - fake huge floating losses
+  - false `已触发` states
+  - distorted total pnl / risk text
+
+#### Practical diagnosis rule
+
+When a cron message is delivered successfully but the content looks absurd, do not stop at delivery verification.
+Inspect the newest output file under:
+
+- `~/.hermes/profiles/<profile>/cron/output/<job_id>/`
+
+Then compare for each holding:
+
+1. `current`
+2. `cost`
+3. `target`
+4. computed `pnl_pct`
+5. `target_hit`
+
+If ordinary A-share stocks are roughly one order of magnitude below both `cost` and `target`, treat it as a **quote scaling / normalization bug**, not a market move.
+
+#### Reusable sanity check
+
+For stock holdings, add or manually apply a simple plausibility test during debugging:
+
+- if `current < cost / 5` and `current < target / 5` for names that are not penny stocks or split-adjusted edge cases,
+- suspect parser scaling first
+- do not trust pnl or trigger calculations derived from that quote
+
+This check is especially useful for holdings lists mixing:
+
+- ETFs near `1.x`
+- ordinary stocks near `10-30`
+
+because a scaling bug can hide in plain sight if only ETFs look normal.
+
+#### Operational conclusion
+
+A passing cron test now requires **two layers** of validation:
+
+1. execution/delivery layer
+   - `last_status: ok`
+   - `last_delivery_error: null`
+   - output file exists
+2. financial-content sanity layer
+   - price magnitude makes sense versus known cost/target bands
+   - pnl totals are directionally plausible
+   - trigger states are not artifacts of scaling
+
+### New stock/get normalization rule: classify by asset type, not one global divisor
+
+A later repair in this setup found a more specific root cause behind absurd intraday pnl and market-value numbers.
+
+#### Failure pattern
+
+After moving quote fetching onto `qt/stock/get`, the parser still produced bad values because it applied one normalization rule too broadly.
+
+Observed symptoms:
+
+- ETFs around `1.x` looked normal
+- but ordinary A-share stocks around `10-30` were printed about 10x too small
+- examples seen in production-like output:
+  - `15.65 -> 1.565`
+  - `17.43 -> 1.743`
+  - `27.14 -> 2.714`
+- index values could also be off by 10x
+- downstream fields then became wrong even though the cron run itself was healthy:
+  - `pnl_amount`
+  - `market_value`
+  - total pnl / total value
+  - trigger-distance judgments
+
+#### Root cause pattern
+
+Do **not** assume one divisor fits all instruments returned by Eastmoney `stock/get`.
+
+A reusable rule from this fix:
+
+- **ETF-like instruments**: normalize quote price fields with `/1000`
+- **ordinary stocks and indices**: normalize quote price fields with `/100`
+
+This rule must be applied consistently to the common quote fields, not just the last price:
+
+- `f2` current price
+- `f4` absolute change
+- `f15` high
+- `f16` low
+- `f17` open
+- `f18` previous close
+
+#### Debugging rule
+
+If pnl totals look absurd, inspect the normalized quote payload before touching rendering.
+
+In particular:
+
+1. run the generator directly, e.g. `generate_monitor_context()`
+2. compare `current` against known `cost` and `next_buy_price`
+3. if ETFs look fine but stocks are 10x too small, suspect an asset-type normalization bug immediately
+
+### New secid-construction rule: verify the final `market.seccode` string, not just the market prefix
+
+Another bug from the same repair path was a malformed `secid`.
+
+#### Failure pattern
+
+A branch intended to produce Shanghai-market secids could accidentally leave the value as just the prefix, e.g. `"1."`, instead of `"1.<code>"`.
+
+When that happens:
+
+- quote fetches silently degrade or miss
+- downstream normalization appears flaky
+- debugging can be misleading because the branching logic looks superficially correct
+
+#### Rule
+
+For every branch that constructs a `secid`, verify the final string contains both:
+
+1. the correct market prefix
+2. the actual security code
+
+A practical safe pattern is to build the entire string in one expression, e.g. `f"1.{code}"`, rather than concatenating partially and assuming the code is appended elsewhere.
+
+### Prompt hardening rule for intraday holdings tables
+
+When the user complains that holdings amounts are in the wrong unit or that price fields look fabricated, do not rely on data fixes alone. Harden the cron prompt too.
+
+The reusable constraints that worked here were:
+
+- amounts such as `market_value`, holding totals, and total account value must be shown in **元**, not `万`
+- `current`, `market_value`, `pnl_amount`, `next_buy_price`, and `distance_to_target_pct` must come directly from the injected JSON
+- do **not** infer or extend new ladder prices from a textual `plan`
+- if a field is missing, mark it missing rather than inventing a price
+
+### New operator-grade publication gate for investment messages
+
+A critical user expectation surfaced here: these investment messages may be used for real trading decisions, so the user must **never** be put in the position of spotting absurd numbers after delivery.
+
+Treat investment monitoring as an **operator-grade** workflow, not a normal content-generation task.
+
+#### Required pre-send checks
+
+Before considering a holdings-monitoring message safe to send, verify all of the following from the structured context:
+
+1. **Line-item arithmetic consistency**
+   - `market_value == current * qty` within rounding tolerance
+   - `pnl_amount == (current - cost) * qty` within rounding tolerance
+2. **Summary consistency**
+   - `total_value == sum(market_value)` within rounding tolerance
+   - `total_pnl == sum(pnl_amount)` within rounding tolerance
+3. **Magnitude sanity**
+   - major indices are in plausible ranges (for example, not `上证 406` when same-day real output is around `4000+`)
+   - ordinary A-share names are not accidentally in ETF-like `1.x` ranges unless they are genuinely penny/edge cases
+4. **Cross-field plausibility**
+   - if a stock holding has `current < cost / 5` and `current < next_buy_price / 5`, suspect scaling/parsing first
+   - if multiple stocks fail this check simultaneously, block delivery and investigate the quote-normalization layer
+
+#### Delivery rule
+
+If these checks fail, do **not** send a polished but wrong investment message.
+
+Preferred behavior:
+
+- block or suppress the formal delivery path
+- log/inspect the output file and structured context
+- only resend after data-layer verification succeeds
+
+In other words: for investment cron jobs, **better no message than a numerically wrong message**.
+
+#### Communication rule after an escaped error
+
+If a bad investment message did escape once, do not make the user re-debug it manually.
+The correct recovery flow is:
+
+1. identify the exact bad output file/job run
+2. recompute the arithmetic from the shown numbers
+3. locate the upstream quote-scaling or normalization fault
+4. provide a corrected version from fresh verified context
+5. tighten the pre-send checks so the same class of error cannot pass silently again
+
+### Context-shape rule for downstream card/model layers
+
+To keep the output deterministic, the generator should explicitly provide the fields the prompt/template needs instead of expecting the model to derive them.
+
+For each holding, expose at least:
+
+- `current`
+- `market_value`
+- `pnl_amount`
+- `next_buy_price`
+- `distance_to_target_pct`
+
+This prevents later regressions where the model:
+
+- converts `元` to `万`
+- recomputes holdings value from rounded text
+- invents a "next buy" level not present in config
 
 ### New resilience rule: add same-day quote cache fallback for intermittent blanks
 

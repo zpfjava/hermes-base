@@ -780,6 +780,102 @@ For this class of job, success is only:
 
 If markdown auto-wrap renders but tables disappear, that is only a temporary transport workaround, **not** a final fix.
 
+## New debugging lesson: apparent "random formatting reversion" can actually be unstable investment context generation
+
+A later repair round showed that user-visible symptoms like these:
+
+- 表格有时消失
+- 模块标题又退回 `【模块名】`
+- 某些字段突然缺失
+- 改完后一段时间又反复
+
+are **not always** caused by Feishu transport or card rendering.
+
+They can come from the investment cron **data/context builder layer** becoming non-deterministic or partially incompatible with the scheduler.
+
+### Practical rule
+
+For investment jobs such as:
+
+- 盘中实时监控
+- 早盘价格检查
+- 收盘价格检查
+- 周一 ETF 定投检查
+
+always inspect the repo module that builds structured context first (for example `cron/investment_monitor.py`) before assuming Feishu is the root cause.
+
+### Failure modes worth checking immediately
+
+1. **Missing or mismatched builder exports**
+   - verify the scheduler/script-facing functions actually exist and are stable:
+     - `build_monitor_context`
+     - `build_open_check_context`
+     - `build_close_check_context`
+     - `build_monday_etf_check_context`
+     - any expected `generate_*` compatibility wrappers
+
+2. **Missing stable loader entrypoints**
+   - if scripts/scheduler expect named loaders, export them explicitly instead of relying on ad hoc JSON reads:
+     - `load_portfolio_config()`
+     - `load_watchlist_config()`
+     - `load_risk_rules()`
+
+3. **Path resolution drift under `HERMES_HOME`**
+   - config files should resolve deterministically from the active profile home
+   - avoid fallback logic that silently switches between:
+     - `~/.hermes/data/investment/...`
+     - `~/.hermes/profiles/<profile>/data/investment/...`
+   - test this explicitly
+
+4. **Watchlist merge bugs that look like random missing fields**
+   - if data comes from both:
+     - `portfolio.json` inline `watchlist`
+     - standalone `watchlist.json`
+   - do **not** just de-duplicate by code and drop the later record
+   - instead, merge by `code` and let the richer source fill missing fields like:
+     - `buy_zone`
+     - `trigger_hint`
+     - `category`
+     - `opportunity`
+   - otherwise cards may intermittently lose columns/rows and trigger fallback rendering paths
+
+5. **Schema contract drift in context rows**
+   - keep stable field names expected by downstream card builders, for example:
+     - `opportunity`
+     - `decision`
+     - `trigger_text`
+     - `distance_to_target_pct`
+   - missing one key can make only part of the card degrade, which looks deceptively random
+
+### Operational lesson: long-lived Hermes processes can keep old behavior alive
+
+Another real cause of “改完了但又反复” was process lifetime, not code correctness:
+
+- Hermes gateway / scheduler related processes may be long-lived
+- after patching repo code, some runs may still use old imported module state or old process state
+- this creates the illusion that formatting is random
+
+#### Practical check
+
+Inspect live processes, for example with:
+
+```bash
+ps -ef | grep -E 'hermes|scheduler|cron' | grep -v grep
+```
+
+If there are long-lived Hermes gateway processes, treat reload/restart state as part of the fix verification.
+
+### Minimum regression gate for this class of repair
+
+Before concluding the issue is fixed, require all of the following:
+
+1. targeted unit/integration tests for the investment context module pass
+2. real profile data can be loaded successfully via the exported loaders
+3. locally built open/close/intraday contexts contain the exact downstream-required keys
+4. a live cron run or equivalent validation confirms the currently running process is using the new code
+
+This prevents a false positive where tests pass but the user still sees an older degraded card path.
+
 ## Example reusable conclusion
 
 When a Feishu cron message looks wrong in Hermes, choose the fix by requirement:
