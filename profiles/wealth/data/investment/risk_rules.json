@@ -1,0 +1,96 @@
+{
+  "meta": {
+    "name": "阿布投资风控与执行规则",
+    "version": 1,
+    "updated_at": "2026-04-23T00:40:32+08:00",
+    "source": [
+      "/root/.openclaw/workspace/wealth/strategies/investment-rules.md",
+      "/root/.openclaw/workspace/wealth/strategies/risk-control.md",
+      "/root/.openclaw/workspace/wealth/portfolio/price-alert-strategy.md",
+      "/root/.openclaw/workspace/wealth/portfolio/abu-investment-plan.md"
+    ]
+  },
+  "core_principles": [
+    "安全第一，低估区域才允许买入。",
+    "严格分档建仓，不一次性满仓。",
+    "不追高，不因为短期上涨临时改策略。",
+    "价值投资靠耐心赚钱，买卖都不要着急。",
+    "保留现金，优先保证下一档有执行能力。"
+  ],
+  "buy_rules": {
+    "bluechips": [
+      "进入低估区域才开始买。",
+      "必须分档入手。",
+      "需要配合现金流管理与仓位管理。"
+    ],
+    "small_bluechips": [
+      "优先细分领域龙头。",
+      "短期暴涨过的股票几年内不再入。",
+      "市值较小、行业认知度低、成长空间大的标的优先。"
+    ],
+    "growth": [
+      "成长股以长期持有为主，很少做波段。",
+      "优先已经具备产品力、但市值仍小且需求空间大的公司。",
+      "中药总仓位不超过总资金 20%。"
+    ]
+  },
+  "sell_rules": {
+    "take_profit": [
+      "翻倍收益后可考虑清仓。",
+      "短期暴涨后及时卖出。"
+    ],
+    "rotation": [
+      "长时间不回到低估区的标的，可以换到新的低估标的。"
+    ],
+    "prohibited": [
+      "短期暴涨过的股票，几年内不再入。",
+      "涨得太疯的暂时不能入。"
+    ]
+  },
+  "position_rules": {
+    "cash_management": [
+      "不要老想着买入，要留好现金。",
+      "市场大跌时才考虑明显加仓。"
+    ],
+    "emotion_based_add": [
+      "利用市场情绪恐慌时加仓。",
+      "允许关注季节性低点，如 1 月底/2 月初、中秋节前。"
+    ],
+    "growth_philosophy": [
+      "成长股最重要的是持股数量，不是抠极致成本。",
+      "不需要执着买到最低点，只要是相对低点即可。"
+    ]
+  },
+  "alert_rules": {
+    "red": "价格 <= 目标价，立即进入执行/提醒状态。",
+    "yellow": "距离目标价约 1% 左右，准备资金并重点盯盘。",
+    "green": "价格高于目标价 5% 以上，维持观察。"
+  },
+  "execution_priority": [
+    {"level": "P0", "name": "ETF 定投", "items": ["消费50ETF", "中概互联ETF"]},
+    {"level": "P1", "name": "股票加仓", "items": ["新洋丰", "龙佰集团"]},
+    {"level": "P2", "name": "基金定投", "items": ["招商量化精选股票A"]}
+  ],
+  "multi_trigger_rule": {
+    "principle": "如果一天内跌穿多个档位，不一次性全打完。",
+    "steps": [
+      "按档位顺序执行。",
+      "每档至少间隔 1 个交易日。",
+      "大跌时可分 2-3 天完成多档执行。"
+    ]
+  },
+  "task_mapping": {
+    "pre_market_report": "盘前环境输入，不给情绪化交易建议。",
+    "open_check": "开盘后快速确认是否偏离预期。",
+    "intraday_monitor": "盯真实持仓与触发条件，有触发优先提醒。",
+    "close_check": "确认尾盘/收盘前是否形成有效信号。",
+    "evening_report": "收盘复盘与次日观察准备。",
+    "monday_etf_check": "周一定投节奏检查，重点围绕消费50ETF和中概互联ETF。",
+    "weekly_report": "一周市场+持仓+策略执行复盘。"
+  },
+  "missing_items": [
+    "最大回撤容忍度未在旧策略中定稿。",
+    "总体仓位上限/下限没有形成最终数字化规则。",
+    "止损规则未明确量化。"
+  ]
+}

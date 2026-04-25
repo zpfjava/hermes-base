@@ -1,0 +1,140 @@
+{
+  "meta": {
+    "name": "阿布投资配置表",
+    "version": 2,
+    "updated_at": "2026-04-23T00:40:32+08:00",
+    "notes": "这里专门存储持仓配置与后续可扩展的投资数据。盘中监控脚本会读取本文件。OpenClaw 旧策略已整理到 watchlist.json / risk_rules.json。"
+  },
+  "indices": [
+    {
+      "name": "上证指数",
+      "quote_id": "1.000001"
+    },
+    {
+      "name": "深证成指",
+      "quote_id": "0.399001"
+    },
+    {
+      "name": "创业板指",
+      "quote_id": "0.399006"
+    }
+  ],
+  "holdings": [
+    {
+      "name": "消费50ETF",
+      "quote_id": "1.515650",
+      "code": "sh515650",
+      "type": "ETF",
+      "qty": 9000,
+      "cost": 1.109,
+      "target": 1.089,
+      "status": "第1档已建仓",
+      "plan": "剩余2万，每跌2%入一档"
+    },
+    {
+      "name": "中概互联ETF",
+      "quote_id": "1.513050",
+      "code": "sh513050",
+      "type": "ETF",
+      "qty": 3000,
+      "cost": 1.209,
+      "target": 1.159,
+      "status": "第1档已建仓",
+      "plan": "剩余2.6万，每跌3%入一档"
+    },
+    {
+      "name": "新洋丰",
+      "quote_id": "0.000902",
+      "code": "sz000902",
+      "type": "股票",
+      "qty": 1100,
+      "cost": 15.0,
+      "target": 13.5,
+      "status": "第1档已建仓",
+      "plan": "每档600股"
+    },
+    {
+      "name": "龙佰集团",
+      "quote_id": "0.002601",
+      "code": "sz002601",
+      "type": "股票",
+      "qty": 500,
+      "cost": 17.201,
+      "target": 16.0,
+      "status": "第1档已建仓",
+      "plan": "每档400股"
+    },
+    {
+      "name": "羚锐制药",
+      "quote_id": "1.600285",
+      "code": "sh600285",
+      "type": "股票",
+      "qty": 900,
+      "cost": 22.062,
+      "target": 22.0,
+      "status": "已入满",
+      "plan": "已入满"
+    },
+    {
+      "name": "华润三九",
+      "quote_id": "0.000999",
+      "code": "sz000999",
+      "type": "股票",
+      "qty": 700,
+      "cost": 28.162,
+      "target": 28.0,
+      "status": "已入满",
+      "plan": "已入满"
+    }
+  ],
+  "watchlist": [
+    {
+      "name": "达仁堂",
+      "code": "sh600329",
+      "category": "成长股-中药",
+      "status": "观察",
+      "trigger_hint": "32以内可入"
+    },
+    {
+      "name": "医疗ETF",
+      "code": "sh512170",
+      "category": "ETF",
+      "status": "观察",
+      "trigger_hint": "先上50%仓位再定投"
+    },
+    {
+      "name": "医药龙头ETF",
+      "code": "sh515950",
+      "category": "ETF",
+      "status": "观察",
+      "trigger_hint": "估值不贵可定投"
+    },
+    {
+      "name": "万华化学",
+      "code": "sh600309",
+      "category": "小蓝筹周期股",
+      "status": "观察",
+      "trigger_hint": "70-80区间以下再看"
+    }
+  ],
+  "cash_plan": {
+    "reserve_cash": null,
+    "notes": "后续可扩展现金仓位、分批预算等信息",
+    "execution_priority": [
+      "P0 ETF定投",
+      "P1 股票加仓",
+      "P2 基金定投"
+    ]
+  },
+  "strategy_notes": [
+    "低估区域才买，严格分档，不追高。",
+    "ETF 主线：消费50ETF每跌2%一档；中概互联ETF每跌3%加3000元。",
+    "股票主线：新洋丰13.5/12.2，龙佰集团16/15，羚锐制药22以内，华润三九28左右重点观察。",
+    "详细观察池见 data/investment/watchlist.json，详细风控见 data/investment/risk_rules.json。"
+  ],
+  "references": {
+    "watchlist": "/root/.hermes/profiles/wealth/data/investment/watchlist.json",
+    "risk_rules": "/root/.hermes/profiles/wealth/data/investment/risk_rules.json",
+    "migration_summary": "/root/.hermes/profiles/wealth/data/investment/openclaw-migration-summary.md"
+  }
+}

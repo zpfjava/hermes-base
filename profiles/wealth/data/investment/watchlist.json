@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "name": "阿布投资观察池",
+    "version": 1,
+    "updated_at": "2026-04-23T00:40:32+08:00",
+    "source": [
+      "/root/.openclaw/workspace/wealth/portfolio/gege-investment-inventory.md",
+      "/root/.openclaw/workspace/wealth/portfolio/abu-investment-plan.md"
+    ],
+    "notes": "由 OpenClaw 旧投资策略迁移整理，供盘前/盘后/周报/策略任务复用。"
+  },
+  "categories": [
+    {
+      "name": "小蓝筹周期股",
+      "strategy": "3-5 年周期，目标翻倍；仅在低估区域分档建仓。",
+      "items": [
+        {"name": "万华化学", "code": "sh600309", "status": "观察", "trigger_hint": "80/75/70 分三档", "buy_zone": "70-80 区间以下再看"},
+        {"name": "龙佰集团", "code": "sz002601", "status": "已持仓", "trigger_hint": "16 / 15", "buy_zone": "第二档 16，第三档 15"},
+        {"name": "新洋丰", "code": "sz000902", "status": "已持仓", "trigger_hint": "13.5 / 12.2", "buy_zone": "第二档 13.5，第三档 12.2"},
+        {"name": "广汇能源", "code": "sh600256", "status": "观察", "trigger_hint": "5.4 / 5.0", "buy_zone": "5.4 以内第一档，5.0 以内第二档"},
+        {"name": "中国巨石", "code": "sh600176", "status": "观察", "trigger_hint": "等待低估", "buy_zone": "等待估值回落"}
+      ]
+    },
+    {
+      "name": "成长股-中药",
+      "strategy": "8-10 年长期持有，目标 3-5 倍；中药总仓不超过总资金 20%。",
+      "items": [
+        {"name": "达仁堂", "code": "sh600329", "status": "观察", "trigger_hint": "32 以内可入", "buy_zone": "32 以内"},
+        {"name": "华润三九", "code": "sz000999", "status": "已持仓", "trigger_hint": "28-29 很香", "buy_zone": "28-29 优先"},
+        {"name": "羚锐制药", "code": "sh600285", "status": "已持仓", "trigger_hint": "22 以内放心入；28-29 可满上", "buy_zone": "22 以内"}
+      ]
+    },
+    {
+      "name": "成长股-创新药",
+      "strategy": "长期持有，享受高成长红利，不追高。",
+      "items": [
+        {"name": "甘李药业", "code": "sh603087", "status": "观察", "trigger_hint": "50 以内尝试，45 更佳", "buy_zone": "45-50 区间"},
+        {"name": "恩华药业", "code": "sz002262", "status": "观察", "trigger_hint": "22 左右可入，29 左右可出一半", "buy_zone": "22 左右"}
+      ]
+    },
+    {
+      "name": "消费/互联网",
+      "strategy": "大蓝筹等待低估区，不追高。",
+      "items": [
+        {"name": "贵州茅台", "code": "sh600519", "status": "观察", "trigger_hint": "1200 以内", "buy_zone": "1200 以内"},
+        {"name": "五粮液", "code": "sz000858", "status": "观察", "trigger_hint": "100 以内", "buy_zone": "100 以内"},
+        {"name": "美的集团", "code": "sz000333", "status": "等待", "trigger_hint": "58 左右低估", "buy_zone": "58 左右"},
+        {"name": "腾讯控股", "code": "hk00700", "status": "等待", "trigger_hint": "400 以内可建仓", "buy_zone": "400 以内"},
+        {"name": "阿里巴巴", "code": "hk09988", "status": "观察", "trigger_hint": "72 以内建仓，130 以内可入", "buy_zone": "优先 72，放宽 130"}
+      ]
+    },
+    {
+      "name": "其他周期股",
+      "strategy": "周期底部区域观察，不急于出手。",
+      "items": [
+        {"name": "牧原股份", "code": "sz002714", "status": "观察", "trigger_hint": "46 以内", "buy_zone": "46 以内"}
+      ]
+    },
+    {
+      "name": "ETF",
+      "strategy": "ETF 以分档定投为主，优先消费50ETF与中概互联ETF。",
+      "items": [
+        {"name": "化工ETF", "code": "sz159870", "status": "观察", "trigger_hint": "0.8 / 0.75 / 0.7", "buy_zone": "0.8 以下再看"},
+        {"name": "消费50ETF", "code": "sh515650", "status": "已持仓", "trigger_hint": "3 万额度；首档后每跌 2% 一档", "buy_zone": "当前以 1.089 为第二档"},
+        {"name": "中概互联ETF", "code": "sh513050", "status": "已持仓", "trigger_hint": "3 万额度；每跌 3% 加 3000", "buy_zone": "当前以 1.159 为第二档"},
+        {"name": "医药龙头ETF", "code": "sh515950", "status": "观察", "trigger_hint": "估值不贵可定投", "buy_zone": "分批定投"},
+        {"name": "医疗ETF", "code": "sh512170", "status": "观察", "trigger_hint": "估值很低，先上 50% 仓位再定投", "buy_zone": "先半仓"}
+      ]
+    },
+    {
+      "name": "基金",
+      "strategy": "基金任务以观察和定投节奏为主。",
+      "items": [
+        {"name": "交银医药创新", "code": "006223", "status": "持有观察", "trigger_hint": "回到低估区可再定投", "buy_zone": "低估区"},
+        {"name": "招商量化精选股票A", "code": "001917", "status": "持有", "trigger_hint": "单日限购 2000；大盘继续下跌可再定投", "buy_zone": "大盘下跌时"},
+        {"name": "摩根新兴动力混合", "code": "001643", "status": "减持/忽略", "trigger_hint": "已高估，不用看了，等下轮熊市", "buy_zone": "暂无"}
+      ]
+    }
+  ],
+  "excluded": [
+    {
+      "name": "伊利股份",
+      "code": "sh600887",
+      "reason": "减持原因看不透，旧策略明确排除。"
+    },
+    {
+      "name": "克明食品",
+      "code": "sz002661",
+      "reason": "旧策略中已离场，原因是基本面不行，不再继续跟踪。"
+    }
+  ]
+}

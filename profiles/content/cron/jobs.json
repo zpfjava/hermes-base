@@ -58,16 +58,16 @@
       "schedule_display": "0 9 * * 0,6",
       "repeat": {
         "times": null,
-        "completed": 0
+        "completed": 1
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-20T16:31:18.122902+08:00",
-      "next_run_at": "2026-04-25T09:00:00+08:00",
-      "last_run_at": null,
-      "last_status": null,
+      "next_run_at": "2026-04-26T09:00:00+08:00",
+      "last_run_at": "2026-04-25T09:02:37.240438+08:00",
+      "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
       "deliver": "feishu:oc_f0d7f9a753c626ad3562846e0584cf69",
@@ -98,16 +98,16 @@
       "schedule_display": "0 11 * * 0,6",
       "repeat": {
         "times": null,
-        "completed": 0
+        "completed": 1
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-20T16:31:19.126923+08:00",
-      "next_run_at": "2026-04-25T11:00:00+08:00",
-      "last_run_at": null,
-      "last_status": null,
+      "next_run_at": "2026-04-26T11:00:00+08:00",
+      "last_run_at": "2026-04-25T11:00:47.215580+08:00",
+      "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
       "deliver": "feishu:oc_f0d7f9a753c626ad3562846e0584cf69",
@@ -121,5 +121,5 @@
       "hermes_home": "/root/.hermes/profiles/content"
     }
   ],
-  "updated_at": "2026-04-24T21:30:23.010069+08:00"
+  "updated_at": "2026-04-25T11:00:47.216070+08:00"
 }
