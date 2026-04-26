@@ -18,15 +18,15 @@
       "schedule_display": "0 18 * * 0",
       "repeat": {
         "times": null,
-        "completed": 4
+        "completed": 5
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-20T16:31:16.115816+08:00",
-      "next_run_at": "2026-04-26T18:00:00+08:00",
-      "last_run_at": "2026-04-21T22:54:22.379426+08:00",
+      "next_run_at": "2026-05-03T18:00:00+08:00",
+      "last_run_at": "2026-04-26T18:01:41.752771+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -41,5 +41,5 @@
       "hermes_home": "/root/.hermes/profiles/planning"
     }
   ],
-  "updated_at": "2026-04-21T22:54:22.379976+08:00"
+  "updated_at": "2026-04-26T18:01:41.753353+08:00"
 }

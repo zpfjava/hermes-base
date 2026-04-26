@@ -18,15 +18,15 @@
       "schedule_display": "0 18 * * 0",
       "repeat": {
         "times": null,
-        "completed": 1
+        "completed": 2
       },
       "enabled": true,
       "state": "scheduled",
       "paused_at": null,
       "paused_reason": null,
       "created_at": "2026-04-20T16:31:22.138630+08:00",
-      "next_run_at": "2026-04-26T18:00:00+08:00",
-      "last_run_at": "2026-04-20T17:45:17.866658+08:00",
+      "next_run_at": "2026-05-03T18:00:00+08:00",
+      "last_run_at": "2026-04-26T18:24:41.587377+08:00",
       "last_status": "ok",
       "last_error": null,
       "last_delivery_error": null,
@@ -321,5 +321,5 @@
       "hermes_home": "/root/.hermes/profiles/wealth"
     }
   ],
-  "updated_at": "2026-04-24T16:21:13.995457+08:00"
+  "updated_at": "2026-04-26T18:24:41.587930+08:00"
 }
