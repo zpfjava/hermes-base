@@ -1,9 +1,18 @@
 model:
-  default: qwen3.5-plus
-  provider: dashscope
-  base_url: https://coding.dashscope.aliyuncs.com/v1
-  context_length: 256000
+  default: deepseek-v4-pro
+  provider: deepseek-official
+  base_url: https://api.deepseek.com
+  api_key: sk-d0dd23b6d94543b19d64a106a99b8c23
+  context_length: 1048576
 providers:
+  deepseek-official:
+    base_url: https://api.deepseek.com
+    api_key: sk-d0dd23b6d94543b19d64a106a99b8c23
+    context_length: 1048576
+    models:
+    - id: deepseek-v4-pro
+      name: DeepSeek V4 Pro
+      context_length: 1048576
   dashscope:
     base_url: https://coding.dashscope.aliyuncs.com/v1
     api_key: sk-sp-b36d4d79c1e8434187d17a875c8be4a7
