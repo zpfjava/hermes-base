@@ -92,4 +92,4 @@ Hermes claw migrate 可迁移 SOUL/MEMORY/Skills/模型与平台配置；API key
 §
 👤 用户信息（阿布） > 当前项目优先级: **拼多多** — 低维护，保留
 §
-阿布偏好 `/root/.hermes` dev→master：23:05 自动建/复用 PR，23:08 只提醒不自动 merge；明确指令后才合并。飞书群回执优先卡片、少走 skill。切 profile 到 openai-codex 时，要同时检查该 profile 的 auth.json，并用 `HERMES_HOME=/root/.hermes/profiles/<profile> hermes chat` 实测。
+阿布偏好：`/root/.hermes` dev→master 23:05 建/复用 PR、23:08 仅提醒不自动 merge，明确指令后才合并；飞书回执优先卡片；切 openai-codex 要查对应 profile 的 auth.json 并实测；`/root/.hermes/hermes-agent` 默认推到 `zpfjava/hermes-base`。

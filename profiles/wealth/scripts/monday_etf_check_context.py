@@ -7,6 +7,9 @@ from cron.investment_monitor import ensure_portfolio_config, generate_monday_etf
 def main():
     ensure_portfolio_config()
     data = generate_monday_etf_check_context(path=get_portfolio_path())
+    if data.get("_trading_day") is False:
+        print("[SILENT]")
+        return
     print(json.dumps(data, ensure_ascii=False, indent=2))
 
 

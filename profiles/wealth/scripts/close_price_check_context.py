@@ -7,6 +7,9 @@ from cron.investment_monitor import ensure_portfolio_config, generate_close_chec
 def main():
     ensure_portfolio_config()
     data = generate_close_check_context(path=get_portfolio_path())
+    if data.get("_trading_day") is False:
+        print("[SILENT]")
+        return
     print(json.dumps(data, ensure_ascii=False, indent=2))
 
 

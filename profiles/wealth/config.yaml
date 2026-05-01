@@ -46,7 +46,7 @@ agent:
   gateway_timeout_warning: 900
   gateway_notify_interval: 600
   verbose: false
-  reasoning_effort: medium
+  reasoning_effort: ''
   personalities:
     helpful: You are a helpful, friendly AI assistant.
     concise: You are a concise assistant. Keep responses brief and to the point.
@@ -377,4 +377,7 @@ custom_providers:
   base_url: https://api.minimax.chat/v1
   api_key: ''
   api_mode: chat_completions
-platforms:
+platforms: null
+onboarding:
+  seen:
+    busy_input_prompt: true
